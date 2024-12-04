@@ -2,7 +2,13 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  css: ["@/assets/style.css"],
+  css: [
+    "@/assets/style.css",
+    "swiper/css",
+    "swiper/css/effect-fade",
+    "swiper/css/navigation",
+    "swiper/css/pagination",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
