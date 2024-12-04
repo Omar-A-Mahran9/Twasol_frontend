@@ -30,9 +30,12 @@
                   </v-img>
 
                   <v-card-title
-                    class="text-white text-center d-flex justify-center align-center"
+                    class="text-white text-center d-flex justify-center align-center text-sm font-bold"
                   >
+                  <p class="text-sm font-bold">
                     {{ n.title[locale] }}
+                  </p>
+              
                   </v-card-title>
                 </v-card>
               </NuxtLink>
@@ -51,57 +54,73 @@ import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
 
 const { locale } = useI18n(); // This will give you the current locale
+const service = ref([]);
+const props = defineProps({
+  service: {
+    type: Array, // Assuming 'services' is an array
+    required: true,
+  },
+});
 
-const service = [
-  {
-    id: 1,
-    title: {
-      ar: "نظافة الواجهات",
-      en: "نظافة الواجهات",
-    },
-    image: "/images/services/serviceone.png",
+// Access the `service` array from props
+service.value = props.service.map((ser) => ({
+  id: ser?.id, // Adjust the id if it's dynamic
+  title: {
+    ar: ser?.name, // Assuming 'name' is the Arabic title
+    en: ser?.name, // Assuming 'name' is the English title
   },
-  {
-    id: 2,
-    title: {
-      ar: "نظافة الواجهات",
-      en: "نظافة الواجهات",
-    },
-    image: "/images/services/servicetwo.png",
-  },
-  {
-    id: 3,
-    title: {
-      ar: "نظافة الواجهات",
-      en: "نظافة الواجهات",
-    },
-    image: "/images/services/servicethree.png",
-  },
-  {
-    id: 4,
-    title: {
-      ar: "نظافة الواجهات",
-      en: "نظافة الواجهات",
-    },
-    image: "/images/services/servicefour.png",
-  },
-  {
-    id: 5,
-    title: {
-      ar: "نظافة الواجهات",
-      en: "نظافة الواجهات",
-    },
-    image: "/images/services/servicefive.png",
-  },
-  {
-    id: 6,
-    title: {
-      ar: "نظافة الواجهات",
-      en: "نظافة الواجهات",
-    },
-    image: "/images/services/servicesex.png",
-  },
-];
+  image: ser?.image, // Assuming 'image' is a property in 'ser'
+}));
+// const service = [
+//   {
+//     id: 1,
+//     title: {
+//       ar: "نظافة الواجهات",
+//       en: "نظافة الواجهات",
+//     },
+//     image: "/images/services/serviceone.png",
+//   },
+//   {
+//     id: 2,
+//     title: {
+//       ar: "نظافة الواجهات",
+//       en: "نظافة الواجهات",
+//     },
+//     image: "/images/services/servicetwo.png",
+//   },
+//   {
+//     id: 3,
+//     title: {
+//       ar: "نظافة الواجهات",
+//       en: "نظافة الواجهات",
+//     },
+//     image: "/images/services/servicethree.png",
+//   },
+//   {
+//     id: 4,
+//     title: {
+//       ar: "نظافة الواجهات",
+//       en: "نظافة الواجهات",
+//     },
+//     image: "/images/services/servicefour.png",
+//   },
+//   {
+//     id: 5,
+//     title: {
+//       ar: "نظافة الواجهات",
+//       en: "نظافة الواجهات",
+//     },
+//     image: "/images/services/servicefive.png",
+//   },
+//   {
+//     id: 6,
+//     title: {
+//       ar: "نظافة الواجهات",
+//       en: "نظافة الواجهات",
+//     },
+//     image: "/images/services/servicesex.png",
+//   },
+// ];
 </script>
 
 <style scoped>

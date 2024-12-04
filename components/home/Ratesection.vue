@@ -31,8 +31,6 @@
         @swiper="onSwiper"
         @slideChange="onSlideChange"
       >
-        {{ rating }}
-
         <swiper-slide v-for="(rate, index) in ratings" :key="index">
           <div id="swiper-container">
             <v-card
@@ -47,7 +45,7 @@
                 <v-card-title>
                   <div class="flex align-center gap-4">
                     <img
-                      :src="rate.person.img"
+                      :src="rate.img"
                       alt=""
                       style="
                         width: 60px;
@@ -57,17 +55,17 @@
                       "
                     />
                     <div class="d-flex flex-col gap-1">
-                      <span>{{ getNameByLocale(rate.person.name) }}</span>
+                      <span>{{ getNameByLocale(rate?.person?.name) }}</span>
                       <p
                         class="text-sm text-light"
                         style="font-size: 12px; color: white"
                       >
-                        {{ getNameByLocale(rate.person.name.position) }}
+                        {{ getNameByLocale(rate?.person?.position) }}
                       </p>
                       <div>
                         <v-row align="center" class="mb-1 ps-2">
                           <v-rating
-                            :model-value="rate.rating"
+                            :model-value="rate?.rating"
                             color="amber"
                             density="compact"
                             size="small"
@@ -81,7 +79,7 @@
                 </v-card-title>
                 <v-card-text class="mt-5 text-justify">
                   <span>{{
-                    truncateText(getNameByLocale(rate.person.title), 110)
+                    truncateText(getNameByLocale(rate.title), 110)
                   }}</span>
                 </v-card-text>
               </v-card-item>
@@ -89,6 +87,7 @@
           </div>
         </swiper-slide>
       </swiper>
+
       <div
         class="custom-swiper-navigation"
         :dir="locale === 'ar' ? 'rtl' : 'ltr'"
@@ -136,103 +135,133 @@ const truncateText = (text, maxLength) => {
   if (!text) return "";
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
-const ratings = [
-  {
+const ratings = ref([]);
+const data = defineProps({
+  rates: {
+    type: Array,
+    required: true,
+    default: () => [],
+  },
+});
+
+ratings.value =
+  data?.rates?.map((item) => ({
     person: {
       name: {
-        ar: "احمد محمد", // Arabic name
-        en: "John Doe", // English name
-        position: {
-          ar: "رئيس تنفيذي لشركة المستقبل",
-          en: "رئيس تنفيذي لشركة المستقبل", // English translation
-        },
+        ar: item.customer_name || "غير معروف", // Fallback name
+        en: item.customer_name || "Unknown",
       },
-      img: "/images/contcatImage/prsonon.png",
-      title: {
-        ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
-        en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
+      position: {
+        ar: "عميل", // Fallback position
+        en: "Client",
       },
     },
-    rating: 4, // Rating out of 5
-  },
-  {
-    person: {
-      name: {
-        ar: "احمد محمد", // Arabic name
-        en: "John Doe", // English name
-        position: {
-          ar: "رئيس تنفيذي لشركة المستقبل",
-          en: "رئيس تنفيذي لشركة المستقبل", // English translation
-        },
-      },
-      img: "/images/contcatImage/prsonon.png",
-      title: {
-        ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
-        en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
-      },
+    img: item.customer_image || "/default-image.png", // Fallback image
+    title: {
+      ar: item.comment || "لا يوجد تعليق", // Fallback comment
+      en: item.comment || "No comment",
     },
-    rating: 4, // Rating out of 5
-  },
-  {
-    person: {
-      name: {
-        ar: "احمد محمد", // Arabic name
-        en: "John Doe", // English name
-        position: {
-          ar: "رئيس تنفيذي لشركة المستقبل",
-          en: "رئيس تنفيذي لشركة المستقبل", // English translation
-        },
-      },
-      img: "/images/contcatImage/prsonon.png",
-      title: {
-        ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
-        en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
-      },
-    },
-    rating: 4, // Rating out of 5
-  },
-  {
-    person: {
-      name: {
-        ar: "احمد محمد", // Arabic name
-        en: "John Doe", // English name
-        position: {
-          ar: "رئيس تنفيذي لشركة المستقبل",
-          en: "رئيس تنفيذي لشركة المستقبل", // English translation
-        },
-      },
-      img: "/images/contcatImage/prsonon.png",
-      title: {
-        ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
-        en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
-      },
-    },
-    rating: 4, // Rating out of 5
-  },
-  {
-    person: {
-      name: {
-        ar: "احمد محمد", // Arabic name
-        en: "John Doe", // English name
-        position: {
-          ar: "رئيس تنفيذي لشركة المستقبل",
-          en: "رئيس تنفيذي لشركة المستقبل", // English translation
-        },
-      },
-      img: "/images/contcatImage/prsonon.png",
-      title: {
-        ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
-        en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
-      },
-    },
-    rating: 4, // Rating out of 5
-  },
-];
+    rating: item.rate || 0, // Fallback rating
+  })) || [];
+
+// const ratings = [
+//   {
+//     person: {
+//       name: {
+//         ar: "احمد محمد", // Arabic name
+//         en: "John Doe", // English name
+//         position: {
+//           ar: "رئيس تنفيذي لشركة المستقبل",
+//           en: "رئيس تنفيذي لشركة المستقبل", // English translation
+//         },
+//       },
+//       img: "/images/contcatImage/prsonon.png",
+//       title: {
+//         ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
+//         en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
+//       },
+//     },
+//     rating: 4, // Rating out of 5
+//   },
+//   {
+//     person: {
+//       name: {
+//         ar: "احمد محمد", // Arabic name
+//         en: "John Doe", // English name
+//         position: {
+//           ar: "رئيس تنفيذي لشركة المستقبل",
+//           en: "رئيس تنفيذي لشركة المستقبل", // English translation
+//         },
+//       },
+//       img: "/images/contcatImage/prsonon.png",
+//       title: {
+//         ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
+//         en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
+//       },
+//     },
+//     rating: 4, // Rating out of 5
+//   },
+//   {
+//     person: {
+//       name: {
+//         ar: "احمد محمد", // Arabic name
+//         en: "John Doe", // English name
+//         position: {
+//           ar: "رئيس تنفيذي لشركة المستقبل",
+//           en: "رئيس تنفيذي لشركة المستقبل", // English translation
+//         },
+//       },
+//       img: "/images/contcatImage/prsonon.png",
+//       title: {
+//         ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
+//         en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
+//       },
+//     },
+//     rating: 4, // Rating out of 5
+//   },
+//   {
+//     person: {
+//       name: {
+//         ar: "احمد محمد", // Arabic name
+//         en: "John Doe", // English name
+//         position: {
+//           ar: "رئيس تنفيذي لشركة المستقبل",
+//           en: "رئيس تنفيذي لشركة المستقبل", // English translation
+//         },
+//       },
+//       img: "/images/contcatImage/prsonon.png",
+//       title: {
+//         ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
+//         en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
+//       },
+//     },
+//     rating: 4, // Rating out of 5
+//   },
+//   {
+//     person: {
+//       name: {
+//         ar: "احمد محمد", // Arabic name
+//         en: "John Doe", // English name
+//         position: {
+//           ar: "رئيس تنفيذي لشركة المستقبل",
+//           en: "رئيس تنفيذي لشركة المستقبل", // English translation
+//         },
+//       },
+//       img: "/images/contcatImage/prsonon.png",
+//       title: {
+//         ar: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .",
+//         en: "نحن محظوظون بالتعامل مع شركة تواصل التكنولوجيا . حيث إنهم يبحثون دائمًا عن حلول فعالة تلبي احتياجاتنا. كما يساعدونا دائما على الظهور في أبهى صورة ويبذلون قصارى جهدهم معنا .", // English translation
+//       },
+//     },
+//     rating: 4, // Rating out of 5
+//   },
+// ];
 
 const onSlideChange = () => {
   console.log("slide change");
 };
 const getNameByLocale = (nameObj) => {
+  if (!nameObj) return locale.value === "ar" ? "غير معروف" : "Unknown";
   return locale.value === "ar" ? nameObj.ar : nameObj.en;
 };
 </script>
@@ -240,6 +269,7 @@ const getNameByLocale = (nameObj) => {
 <style scoped>
 #swiper-container {
   position: relative;
+  margin: auto;
 }
 .iconQ {
   position: absolute; /* Position relative to the card */

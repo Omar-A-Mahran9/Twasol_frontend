@@ -51,7 +51,6 @@
 
 <script setup>
 // Define the modules you want to use in the swiper
-const modules = [EffectCoverflow, Pagination];
 
 import { ref } from "vue";
 

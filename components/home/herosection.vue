@@ -2,7 +2,6 @@
   <v-carousel height="756" show-arrows="hover" cycle hide-delimiter-background>
     <v-carousel-item v-for="(slide, i) in cover" :key="i">
       <v-sheet
-        :color="colors[i]"
         height="100%"
         :style="{
           backgroundImage: 'url(' + slide.image + ')',
@@ -30,18 +29,18 @@
           style="position: relative; z-index: 9999"
         >
           <div>
-            <div class="text-h5 text-md-h3 mb-5 font-weight-bold">
-              <p>{{ slide.title.en }}</p>
+            <div class="text-h5 text-md-h3 mb-5 font-extrabold">
+              <p class="text-white font-extrabold">{{ slide.title[locale] }}</p>
             </div>
             <div class="text-subtitle-1 mb-5">
-              <p>{{ slide.subtitle.en }}</p>
+              <p class="text-white">{{ slide.subtitle[locale] }}</p>
             </div>
             <div>
               <nuxt-link to="/auth/login">
                 <v-btn class="!bg-main text-white !font-bold mx-10">
                   {{ $t("Contact Us") }}
-                </v-btn></nuxt-link
-              >
+                </v-btn>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -49,49 +48,30 @@
     </v-carousel-item>
   </v-carousel>
 </template>
-<script setup>
-const colors = [
-  "indigo",
-  "warning",
-  "pink darken-2",
-  "red lighten-1",
-  "deep-purple accent-4",
-];
-const slides = ["First", "Second", "Third", "Fourth", "Fifth"];
 
-const cover = [
-  {
-    title: {
-      ar: "لا تشيل هم النظافة بعد اليوم",
-      en: "لا تشيل هم النظافة بعد اليوم",
-    },
-    subtitle: {
-      ar: "نسعى في تواصل التكنولوجيا إلى أن نكون الشريك الأول للعملاء في تحقيق أعلى معايير النظافة والجودة",
-      en: "نسعى في تواصل التكنولوجيا إلى أن نكون الشريك الأول للعملاء في تحقيق أعلى معايير النظافة والجودة",
-    },
-    image: "/images/cover/coverone.png",
-  },
-  {
-    title: {
-      ar: "لا تشيل هم النظافة بعد اليوم",
-      en: "لا تشيل هم النظافة بعد اليوم",
-    },
-    subtitle: {
-      ar: "نسعى في تواصل التكنولوجيا إلى أن نكون الشريك الأول للعملاء في تحقيق أعلى معايير النظافة والجودة",
-      en: "نسعى في تواصل التكنولوجيا إلى أن نكون الشريك الأول للعملاء في تحقيق أعلى معايير النظافة والجودة",
-    },
-    image: "/images/cover/covertwo.png",
-  },
-  {
-    title: {
-      ar: "لا تشيل هم النظافة بعد اليوم",
-      en: "لا تشيل هم النظافة بعد اليوم",
-    },
-    subtitle: {
-      ar: "نسعى في تواصل التكنولوجيا إلى أن نكون الشريك الأول للعملاء في تحقيق أعلى معايير النظافة والجودة",
-      en: "نسعى في تواصل التكنولوجيا إلى أن نكون الشريك الأول للعملاء في تحقيق أعلى معايير النظافة والجودة",
-    },
-    image: "/images/cover/coverthree.png",
-  },
-];
+<script setup>
+const { locale } = useI18n(); // This will give you the current locale
+
+import { ref, onMounted } from "vue";
+const config = useRuntimeConfig(); // Ensure runtime config is set up correctly
+const cover = ref([]); // Initialize ref to store slider data
+const { data, error } = await useFetch(`${config.public.apiBase}sliders`);
+if (data) {
+  cover.value =
+    data?.value?.data?.map((item) => ({
+      title: {
+        ar: item.title, // Assuming API provides a title
+        en: item.title, // Adjust if English title is different
+      },
+      subtitle: {
+        ar: item.description, // Assuming API provides a description
+        en: item.description, // Adjust if English description is different
+      },
+      image: item.image, // Assuming API provides an image path
+    })) || [];
+}
 </script>
+
+<style scoped>
+/* Add your styles here */
+</style>

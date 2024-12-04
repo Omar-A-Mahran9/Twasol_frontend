@@ -10,7 +10,7 @@
               height="400"
               frameborder="10"
               style="border: 0"
-              src="https://www.youtube.com/embed/LlYGybIfP0o?si=u9vQ6EO004PUXv3u"
+              :src="aboutus.video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             >
@@ -72,10 +72,20 @@ import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
 
 const { locale } = useI18n(); // This will give you the current locale
+// const aboutus = ref();
+// Define props
+const data = defineProps({
+  about_us: {
+    type: Array, // Assuming it's an array of objects with `description`
+    required: true,
+  },
+});
 
+// Restructure dynamically into `ar` and `en`
 const aboutus = ref({
-  ar: "مؤسسة تواصل التكنولوجيا من المؤسسات المتخصصة في مجال نظافة الشركات وواجهات الابراج ومكافحة الحشرات والنمل الأبيض  وذلك من خلال فريق عملها المتميز والمدرب من خلال القائمين على إدارة المؤسسة الذين لديهم الخبرة العالية في هذا المجال",
-  en: "Tawasul Technology Foundation is a specialized institution in the field of corporate cleaning, building facade maintenance, and pest control, including termites. This is achieved through its outstanding and well-trained team, managed by individuals with extensive expertise in this field.",
+  ar: data?.about_us?.description,
+  en: data?.about_us?.description,
+  video: data?.about_us?.video,
 });
 </script>
 
