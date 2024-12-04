@@ -10,13 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.36",
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.1.5",
     "@lottiefiles/dotlottie-vue": "^0.4.18",
     "@mdi/font": "^7.4.47",
     "@nuxtjs/i18n": "^9.0.0-rc.2",
+    "@pinia/nuxt": "^0.9.0",
     "@typescript-eslint/typescript-estree": "^8.12.2",
     "nuxt": "^3.13.2",
+    "pinia": "^2.3.0",
     "swiper": "^11.1.15",
     "typescript": "^4.9.5",
     "vue": "^3.2.47",

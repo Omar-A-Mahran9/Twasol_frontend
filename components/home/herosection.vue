@@ -1,5 +1,5 @@
 <template>
-  <v-carousel height="756" show-arrows="hover" cycle hide-delimiter-background>
+  <v-carousel class="main-hero-container" show-arrows="hover" cycle hide-delimiter-background>
     <v-carousel-item v-for="(slide, i) in cover" :key="i">
       <v-sheet
         height="100%"
@@ -72,6 +72,17 @@ if (data) {
 }
 </script>
 
-<style scoped>
-/* Add your styles here */
+<style>
+.main-hero-container{
+  height: 756px !important;
+}
+@media(max-width:750px){
+  .main-hero-container{
+  height: 400px !important;
+}
+.swiper-button-prev,
+.swiper-button-next{
+  display: none !important;
+}
+}
 </style>

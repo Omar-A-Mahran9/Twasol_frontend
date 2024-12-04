@@ -32,8 +32,15 @@
                 height="250"
                 @click="toggle"
               >
-                <v-img width="100%" :src="n.image" cover class="zoom-effect">
-                </v-img>
+              <a
+          :data-src="n.image"
+          class="cursor-pointer"
+          data-fancybox="gallery"
+          :data-caption="`Gallery A #0`"
+        >
+          <v-img width="100%" :src="n.image" cover class="zoom-effect">
+          </v-img>
+        </a>
               </v-card>
             </v-slide-group-item>
           </v-slide-group>
@@ -45,6 +52,8 @@
 
 <script setup>
 import { ref } from "vue";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
@@ -71,6 +80,11 @@ const gallary = [
     image: "/images/services/servicesex.png",
   },
 ];
+onMounted(() => {
+  Fancybox.bind("[data-fancybox]", {
+    //Custom options for all galleries
+  });
+});
 </script>
 
 <style scoped>

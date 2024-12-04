@@ -118,7 +118,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
 const { t, locale } = useI18n();
-
+import {GeneralStore} from '@/stores/general';
+let store = GeneralStore();
+// store.generalData
 // Swiper event handlers
 const onSwiper = (swiper) => {
   console.log(swiper);

@@ -2,9 +2,10 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      apiBase: "http://127.0.0.1:8000/api/", // Public base URL
+      apiBase: "https://admin.tawasol-technology.com/api/", // Public base URL
     },
   },
+  ssr: false,
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   css: [
@@ -25,6 +26,7 @@ export default defineNuxtConfig({
   },
   modules: [
     "@nuxtjs/i18n",
+    '@pinia/nuxt',
 
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {

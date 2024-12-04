@@ -8,7 +8,7 @@
         <v-sheet class="bg-transparent">
           <v-slide-group v-model="model" class="pa-4" center-active>
             <v-slide-group-item
-              v-for="n in service"
+              v-for="n in store.generalData?.services"
               :key="n"
               v-slot="{ isSelected, toggle }"
               class=""
@@ -33,7 +33,8 @@
                     class="text-white text-center d-flex justify-center align-center text-sm font-bold"
                   >
                   <p class="text-sm font-bold">
-                    {{ n.title[locale] }}
+                    {{ n.name }}
+                    <!-- {{ n.title[locale] }} -->
                   </p>
               
                   </v-card-title>
@@ -49,28 +50,29 @@
 
 <script setup>
 import { ref } from "vue";
-
+import {GeneralStore} from '@/stores/general';
+let store = GeneralStore();
 import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
 
 const { locale } = useI18n(); // This will give you the current locale
-const service = ref([]);
-const props = defineProps({
-  service: {
-    type: Array, // Assuming 'services' is an array
-    required: true,
-  },
-});
+// const service = ref([]);
+// const props = defineProps({
+//   service: {
+//     type: Array, // Assuming 'services' is an array
+//     required: true,
+//   },
+// });
 
-// Access the `service` array from props
-service.value = props.service.map((ser) => ({
-  id: ser?.id, // Adjust the id if it's dynamic
-  title: {
-    ar: ser?.name, // Assuming 'name' is the Arabic title
-    en: ser?.name, // Assuming 'name' is the English title
-  },
-  image: ser?.image, // Assuming 'image' is a property in 'ser'
-}));
+// // Access the `service` array from props
+// service.value = props.service.map((ser) => ({
+//   id: ser?.id, // Adjust the id if it's dynamic
+//   title: {
+//     ar: ser?.name, // Assuming 'name' is the Arabic title
+//     en: ser?.name, // Assuming 'name' is the English title
+//   },
+//   image: ser?.image, // Assuming 'image' is a property in 'ser'
+// }));
 // const service = [
 //   {
 //     id: 1,

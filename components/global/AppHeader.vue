@@ -25,7 +25,7 @@
       <div class="flex lg:hidden">
         <button
           type="button"
-          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          class="-m-2.5 inline-flex bg-main items-center justify-center rounded-md p-2.5 text-gray-700"
           @click="mobileMenuOpen = true"
         >
           <span class="sr-only">Open main menu</span>
@@ -175,7 +175,7 @@
           </nuxt-link>
           <button
             type="button"
-            class="-m-2.5 rounded-md p-2.5 text-gray-700"
+            class="-m-2.5 bg-main rounded-md p-2.5 text-gray-700"
             @click="mobileMenuOpen = false"
           >
             <span class="sr-only">Close menu</span>
@@ -184,7 +184,7 @@
         </div>
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
-            <div class="space-y-2 py-6">
+            <div class="space-y-2 py-6 flex flex-col  items-center gap-2">
               <nuxt-link
                 to="#"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
@@ -217,7 +217,7 @@
                 >{{ $t("Contact us") }}</nuxt-link
               >
             </div>
-            <div class="py-6 d-flex">
+            <div class="py-6 flex flex-col items-center gap-4">
               <div>
                 <v-btn class="!bg-main text-white !font-bold mx-10">
                   {{ $t("Sign in") }}
@@ -227,7 +227,7 @@
                 <v-menu open-on-hover>
                   <template v-slot:activator="{ props }">
                     <div v-bind="props">
-                      <span class="d-flex flex-col">
+                      <span class="flex items-center">
                         <div>
                           <div v-if="locale === 'ar'" class="d-flex">
                             <img class="h-5 w-auto" src=" " />

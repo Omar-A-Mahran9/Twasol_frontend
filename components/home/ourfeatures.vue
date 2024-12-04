@@ -1,10 +1,10 @@
 <template>
   <div class="container mb-20 mt-20">
     <div class="flex justify-center">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 px-3 md:grid-cols-4 gap-4">
         <div>
           <div
-            class="w-1/2 lg:w-72 h-1/2 lg:h-[205px] px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
+            class=" h-[130px] lg:h-[205px] xl:h-[205px] px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
           >
             <div
               class="w-40 flex-col justify-start items-center gap-4 inline-flex"
