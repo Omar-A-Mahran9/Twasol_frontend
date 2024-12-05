@@ -18,7 +18,7 @@
                     </div>
                   </v-row>
                   <v-row>
-                    <nuxt-link to="/auth/login">
+                    <nuxt-link to="/NewOrder">
                       <v-btn class="!bg-main text-white !font-bold mt-5">
                         {{ $t("Order Now") }}
                       </v-btn></nuxt-link
@@ -37,7 +37,7 @@
               height="400"
               frameborder="10"
               style="border: 0"
-              src="https://www.youtube.com/embed/LlYGybIfP0o?si=u9vQ6EO004PUXv3u"
+              src="https://www.youtube.com/embed/8RJ_DUKRdVs?si=H1LmiyPsmRcGAQci"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             >

@@ -401,7 +401,7 @@ const { locale } = useI18n(); // This will give you the current locale
 import { ref } from "vue"; // Import ref from Vue
 
 const footer = {
-  email: " info@alraqii.com",
+  email: " info@tawasol-technology.com",
   phone: "+966568623333",
   address: {
     ar: "جدة - الذهب- المملكة العربيه السعودية",

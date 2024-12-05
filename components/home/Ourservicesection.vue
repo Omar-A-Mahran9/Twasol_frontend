@@ -1,6 +1,6 @@
 <template>
   <div id="Ourservice" class="Ourservice">
-    <div class="container py-16">
+    <div class="container pb-16 md:pt-16">
       <div class="d-flex flex-column">
         <h2 class="text-center text-3xl font-bold mb-8 text-[#1C95CA]">
           {{ $t("Our Service") }}
@@ -8,7 +8,7 @@
         <v-sheet class="bg-transparent">
           <v-slide-group v-model="model" class="pa-4" center-active>
             <v-slide-group-item
-              v-for="n in store.generalData?.services"
+              v-for="n in service"
               :key="n"
               v-slot="{ isSelected, toggle }"
               class=""
@@ -32,17 +32,17 @@
                   <v-card-title
                     class="text-white text-center d-flex justify-center align-center text-sm font-bold"
                   >
-                  <p class="text-sm font-bold">
-                    {{ n.name }}
-                    <!-- {{ n.title[locale] }} -->
-                  </p>
-              
+                    <p class="text-sm font-bold">
+                      {{ n.title[locale] }}
+                    </p>
                   </v-card-title>
                 </v-card>
               </NuxtLink>
             </v-slide-group-item>
           </v-slide-group>
         </v-sheet>
+
+        <!-- {{ store?.generalData?.services }} -->
       </div>
     </div>
   </div>
@@ -50,29 +50,24 @@
 
 <script setup>
 import { ref } from "vue";
-import {GeneralStore} from '@/stores/general';
+import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
 import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
 
 const { locale } = useI18n(); // This will give you the current locale
-// const service = ref([]);
-// const props = defineProps({
-//   service: {
-//     type: Array, // Assuming 'services' is an array
-//     required: true,
-//   },
-// });
-
-// // Access the `service` array from props
-// service.value = props.service.map((ser) => ({
-//   id: ser?.id, // Adjust the id if it's dynamic
-//   title: {
-//     ar: ser?.name, // Assuming 'name' is the Arabic title
-//     en: ser?.name, // Assuming 'name' is the English title
-//   },
-//   image: ser?.image, // Assuming 'image' is a property in 'ser'
-// }));
+const service = computed(() => {
+  return (
+    store.generalData?.services?.map((ser) => ({
+      id: ser?.id,
+      title: {
+        ar: ser?.name,
+        en: ser?.name,
+      },
+      image: ser?.image,
+    })) || []
+  );
+});
 // const service = [
 //   {
 //     id: 1,

@@ -2,10 +2,11 @@
   <div id="contact_us" class="contact">
     <div class="container py-16">
       <v-row justify="center" align="center">
-        <v-col cols="12" sm="12" md="6" lg="6">
+        <v-col cols="12" sm="12" md="6" lg="6" class="mb-10">
           <v-card rounded="xl">
             <!-- Google Map iframe -->
             <iframe
+              class="map-iframe"
               width="100%"
               height="400"
               frameborder="10"
@@ -298,7 +299,17 @@ const handleSubmit = async () => {
     /* Top right corner */ 60% 70% /* Pointing downwards */
   ); /* Creates a triangular shape pointing upwards */
 }
+.map-iframe {
+  width: 100%;
+  height: 400px;
+}
 
+/* For mobile devices (max-width: 768px) */
+@media (max-width: 768px) {
+  .map-iframe {
+    height: 300px; /* Set a smaller height on mobile */
+  }
+}
 @media screen and (max-width: 960px) {
   .contact {
     background-color: transparent;

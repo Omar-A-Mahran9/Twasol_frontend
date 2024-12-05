@@ -1,11 +1,11 @@
 <template>
   <div id="client_evaluation" class="container my-16">
     <div>
-       <!-- Grid Layout -->
+      <!-- Grid Layout -->
       <v-row class="mx-2">
         <v-col
-          v-for="(blog, index) in paginatedBlogs"
-          :key="blog.id"
+          v-for="(award, index) in paginatedawards"
+          :key="award.id"
           cols="12"
           md="4"
           class="mb-4"
@@ -13,7 +13,7 @@
           <v-card
             :disabled="loading"
             :loading="loading"
-            class="mx-auto my-12 rounded-xl"
+            class="mx-auto my-12 rounded-xl a4-paper-size"
             max-width="374"
           >
             <template v-slot:loader="{ isActive }">
@@ -24,31 +24,20 @@
                 indeterminate
               ></v-progress-linear>
             </template>
-
-            <v-img height="250" :src="blog.imageUrl" cover></v-img>
-
-            <v-card-item>
-              <v-card-title>{{ blog.title[locale] }}</v-card-title>
-            </v-card-item>
-
-            <v-card-text>
-              <div>{{ truncateText(blog.description[locale], 80) }}</div>
-            </v-card-text>
-
-            <div class="d-flex justify-space-between">
-              <v-list-item density="compact" prepend-icon="mdi-calendar-blank">
-                <v-list-item-subtitle>{{ blog.date }}</v-list-item-subtitle>
-              </v-list-item>
-
-              <v-card-actions>
-                <NuxtLink
-                  :to="`/blogs/blogdetails/${blog.id}`"
-                  class="text-main"
-                >
-                  <p class="text-main">{{ $t("Read more") }} >></p>
-                </NuxtLink>
-              </v-card-actions>
-            </div>
+            
+            <a
+              :data-src="award.imageUrl"
+              class="cursor-pointer"
+              data-fancybox="gallery"
+              :data-caption="`Gallery A #0`"
+            >
+              <v-img
+                class="image-fill"
+                :src="award.imageUrl"
+                alt="award Image"
+              ></v-img>
+            </a>
+            <!-- Make the image fill the entire card without cropping -->
           </v-card>
         </v-col>
       </v-row>
@@ -79,25 +68,27 @@
 import { ref, computed, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { GeneralStore } from "@/stores/general";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 const { t, locale } = useI18n();
 const store = GeneralStore();
 const loading = ref(false);
 
-// Reactive blogs data
-const blogs = computed(() =>
-  store.blogsData.map((blog) => ({
-    id: blog.id,
+// Reactive awards data
+const awards = computed(() =>
+  store.awardsData.map((award) => ({
+    id: award.id,
     title: {
-      ar: blog.name || "عنوان غير متوفر",
-      en: blog.name || "Title not available",
+      ar: award.name || "عنوان غير متوفر",
+      en: award.name || "Title not available",
     },
-    imageUrl: blog.image || "/images/default-image.png",
+    imageUrl: award.image || "/images/default-image.png",
     description: {
-      ar: blog.description || "وصف غير متوفر",
-      en: blog.description || "Description not available",
+      ar: award.description || "وصف غير متوفر",
+      en: award.description || "Description not available",
     },
-    date: blog.created || "N/A",
+    date: award.created || "N/A",
   }))
 );
 
@@ -106,17 +97,17 @@ const itemsPerPage = ref(6);
 const currentPage = ref(1);
 
 const totalPages = computed(() =>
-  Math.ceil(blogs.value.length / itemsPerPage.value)
+  Math.ceil(awards.value.length / itemsPerPage.value)
 );
 
-const paginatedBlogs = computed(() => {
+const paginatedawards = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
-  return blogs.value.slice(start, start + itemsPerPage.value);
+  return awards.value.slice(start, start + itemsPerPage.value);
 });
 
-// Watch for changes in blogsData and reset current page
+// Watch for changes in awardsData and reset current page
 watch(
-  () => store.blogsData,
+  () => store.awardsData,
   () => {
     currentPage.value = 1; // Reset to the first page
   }
@@ -135,12 +126,11 @@ const previousPage = () => {
   }
 };
 
-const truncateText = (text, maxLength) => {
-  if (text.length > maxLength) {
-    return text.substring(0, maxLength) + "...";
-  }
-  return text;
-};
+onMounted(() => {
+  Fancybox.bind("[data-fancybox]", {
+    //Custom options for all galleries
+  });
+});
 </script>
 
 <style scoped>
@@ -161,5 +151,19 @@ const truncateText = (text, maxLength) => {
 button[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.a4-paper-size {
+  width: 288px; /* A4 width in pixels */
+  height: 410px; /* A4 height in pixels */
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.image-fill {
+  object-fit: contain; /* Ensures the image is scaled to fit without cropping */
+  width: 100%; /* Make the image take up the full width of the card */
+  height: 100%; /* Make the image take up the full height of the card */
 }
 </style>

@@ -5,6 +5,9 @@ export default defineI18nConfig(() => ({
     en: {},
     ar: {
       Home: "الرئيسية",
+
+      "Why Tawasol Technology??": "لماذا تواصل التكنولوجيا؟؟",
+
       "Show all": "عرض الكل",
       "who us": "من نحن",
       "Contact Us": "تواصل معنا",

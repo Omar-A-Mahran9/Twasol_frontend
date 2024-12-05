@@ -6,8 +6,8 @@
           <v-card rounded="xl">
             <!-- YouTube iframe -->
             <iframe
+              class="responsive-iframe"
               width="100%"
-              height="400"
               frameborder="10"
               style="border: 0"
               :src="aboutus.video"
@@ -42,14 +42,15 @@
                       ></div>
 
                       <article>
-                        <p class="text-gray-700 text-justify leading-7">
-                          {{ aboutus[locale] }}
-                        </p>
+                        <p
+                          class="text-gray-700 text-justify leading-7"
+                          v-html="aboutus[locale]"
+                        ></p>
                       </article>
                     </div>
                   </v-row>
                   <v-row>
-                    <nuxt-link to="/auth/login">
+                    <nuxt-link to="/about_us">
                       <v-btn class="!bg-main text-white !font-bold mt-5">
                         {{ $t("Show more") }}
                       </v-btn></nuxt-link
@@ -68,25 +69,32 @@
 <script setup>
 import { ref } from "vue";
 
-import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
-const config = useRuntimeConfig();
+import { GeneralStore } from "@/stores/general";
+let store = GeneralStore();
 
 const { locale } = useI18n(); // This will give you the current locale
-// const aboutus = ref();
-// Define props
-const data = defineProps({
-  about_us: {
-    type: Array, // Assuming it's an array of objects with `description`
-    required: true,
-  },
+
+// Reactive variable to store data
+const aboutus = ref({
+  ar: "",
+  en: "",
+  video: "",
 });
 
-// Restructure dynamically into `ar` and `en`
-const aboutus = ref({
-  ar: data?.about_us?.description,
-  en: data?.about_us?.description,
-  video: data?.about_us?.video,
-});
+// Watch for changes in `store.generalData`
+watch(
+  () => store?.generalData?.about_us,
+  (newData) => {
+    if (newData) {
+      aboutus.value = {
+        ar: newData.description,
+        en: newData.description,
+        video: newData.video,
+      };
+    }
+  },
+  { immediate: true } // Trigger the watcher immediately
+);
 </script>
 
 <style scoped>
@@ -111,6 +119,16 @@ const aboutus = ref({
 .about > * {
   position: relative;
   z-index: 2; /* Ensures content sits on top of the overlay */
+}
+.responsive-iframe {
+  height: 200px; /* Default for mobile */
+}
+
+@media (min-width: 768px) {
+  /* For tablets and larger screens */
+  .responsive-iframe {
+    height: 400px;
+  }
 }
 
 @media screen and (max-width: 960px) {

@@ -1,5 +1,10 @@
 <template>
-  <v-carousel class="main-hero-container" show-arrows="hover" cycle hide-delimiter-background>
+  <v-carousel
+    class="main-hero-container"
+    show-arrows="hover"
+    cycle
+    hide-delimiter-background
+  >
     <v-carousel-item v-for="(slide, i) in cover" :key="i">
       <v-sheet
         height="100%"
@@ -36,7 +41,7 @@
               <p class="text-white">{{ slide.subtitle[locale] }}</p>
             </div>
             <div>
-              <nuxt-link to="/auth/login">
+              <nuxt-link to="/contact_us">
                 <v-btn class="!bg-main text-white !font-bold mx-10">
                   {{ $t("Contact Us") }}
                 </v-btn>
@@ -73,16 +78,16 @@ if (data) {
 </script>
 
 <style>
-.main-hero-container{
+.main-hero-container {
   height: 756px !important;
 }
-@media(max-width:750px){
-  .main-hero-container{
-  height: 400px !important;
-}
-.swiper-button-prev,
-.swiper-button-next{
-  display: none !important;
-}
+@media (max-width: 750px) {
+  .main-hero-container {
+    height: 400px !important;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
 }
 </style>

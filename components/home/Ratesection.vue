@@ -118,10 +118,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
 const { t, locale } = useI18n();
-import {GeneralStore} from '@/stores/general';
+import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
-// store.generalData
-// Swiper event handlers
+
 const onSwiper = (swiper) => {
   console.log(swiper);
 };
@@ -137,34 +136,33 @@ const truncateText = (text, maxLength) => {
   if (!text) return "";
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
+const ratedata = computed(() => store?.generalData?.Rate || []); // Ensure reactivity
 const ratings = ref([]);
-const data = defineProps({
-  rates: {
-    type: Array,
-    required: true,
-    default: () => [],
-  },
-});
 
-ratings.value =
-  data?.rates?.map((item) => ({
-    person: {
-      name: {
-        ar: item.customer_name || "غير معروف", // Fallback name
-        en: item.customer_name || "Unknown",
+watch(
+  ratedata, // Watch the computed property for changes
+  (newRateData) => {
+    ratings.value = newRateData.map((item) => ({
+      person: {
+        name: {
+          ar: item.customer_name || "غير معروف",
+          en: item.customer_name || "Unknown",
+        },
+        position: {
+          ar: "عميل",
+          en: "Client",
+        },
       },
-      position: {
-        ar: "عميل", // Fallback position
-        en: "Client",
+      img: item.customer_image || "/default-image.png",
+      title: {
+        ar: item.comment || "لا يوجد تعليق",
+        en: item.comment || "No comment",
       },
-    },
-    img: item.customer_image || "/default-image.png", // Fallback image
-    title: {
-      ar: item.comment || "لا يوجد تعليق", // Fallback comment
-      en: item.comment || "No comment",
-    },
-    rating: item.rate || 0, // Fallback rating
-  })) || [];
+      rating: item.rate || 0,
+    }));
+  },
+  { immediate: true } // Trigger the watcher immediately to initialize `ratings`
+);
 
 // const ratings = [
 //   {

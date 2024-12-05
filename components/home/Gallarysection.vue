@@ -11,8 +11,7 @@
             v-model="model"
             class="pa-4"
             center-active
-            show-arrows="mobile"
-          >
+           >
             <v-slide-group-item
               v-for="n in gallary"
               :key="n"

@@ -25,11 +25,13 @@
       <div class="flex lg:hidden">
         <button
           type="button"
-          class="-m-2.5 inline-flex bg-main items-center justify-center rounded-md p-2.5 text-gray-700"
+          class="-m-2.5 flex flex-col gap-1 bg-main items-center justify-center rounded-md p-2.5 text-gray-700"
           @click="mobileMenuOpen = true"
         >
           <span class="sr-only">Open main menu</span>
-          <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+          <span class="block w-6 h-1 bg-gray-700 rounded-sm bg-white"></span>
+          <span class="block w-6 h-1 bg-gray-700 rounded-sm bg-white"></span>
+          <span class="block w-6 h-1 bg-gray-700 rounded-sm bg-white"></span>
         </button>
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
@@ -93,7 +95,7 @@
         >
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end align-middle">
-        <nuxt-link to="/auth/login">
+        <nuxt-link to="/NewOrder">
           <v-btn class="!bg-main text-white !font-bold mx-10">
             {{ $t("Order Now") }}
           </v-btn></nuxt-link
@@ -162,90 +164,138 @@
       >
         <div class="flex items-center justify-between">
           <nuxt-link to="/" class="-m-1.5 p-1.5">
-            <span class="sr-only">{{ $t("Al Raqi") }}</span>
-
             <div v-if="locale === 'ar'" class="d-flex">
-              <img class="h-5 w-auto" src="" alt="Company logo" />
+              <img
+                class="h-12 w-auto"
+                src="/images/header/logo.png"
+                alt="Company logo"
+              />
             </div>
             <div v-else>
-              <h1 class="text-main font-bold" style="font-size: 190%">
-                Al Raqi
-              </h1>
+              <img
+                class="h-12 w-auto"
+                src="/images/header/logo.png"
+                alt="Company logo"
+              />
             </div>
           </nuxt-link>
           <button
             type="button"
-            class="-m-2.5 bg-main rounded-md p-2.5 text-gray-700"
+            class="-m-2.5 rounded-md p-2.5 text-gray-700"
             @click="mobileMenuOpen = false"
           >
-            <span class="sr-only">Close menu</span>
-            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+            <span class="fs-xl m-5 text-main" style="font-size: 28px"> X</span>
           </button>
         </div>
+
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
-            <div class="space-y-2 py-6 flex flex-col  items-center gap-2">
+            <div class="space-y-2 py-6 flex flex-col items-center gap-7">
               <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
+                to="/"
+                class="text-sm leading-6"
+                :class="{
+                  'text-main font-extrabold active': $route.path === '/',
+                }"
+                @click="mobileMenuOpen = false"
                 >{{ $t("Home") }}</nuxt-link
               >
               <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                >{{ $t("Why us") }}</nuxt-link
+                to="/our_service"
+                class="text-sm font-normal leading-6 text-gray-900"
+                :class="{
+                  'text-main font-extrabold active':
+                    $route.path === '/our_service',
+                }"
+                @click="mobileMenuOpen = false"
+                >{{ $t("Our Service") }}</nuxt-link
               >
               <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                >{{ $t("Car types") }}</nuxt-link
+                to="/contact_us"
+                class="text-sm font-normal leading-6 text-gray-900"
+                :class="{
+                  'text-main font-extrabold active':
+                    $route.path === '/contact_us',
+                }"
+                @click="mobileMenuOpen = false"
+                >{{ $t("Contact Us") }}</nuxt-link
+              >
+              <nuxt-link
+                to="/blogs"
+                class="text-sm font-normal leading-6 text-gray-900"
+                :class="{
+                  'text-main font-extrabold active': $route.path === '/blogs',
+                }"
+                @click="mobileMenuOpen = false"
+                >{{ $t("Blogs") }}</nuxt-link
+              >
+              <nuxt-link
+                to="/about_us"
+                class="text-sm font-normal leading-6 text-gray-900"
+                :class="{
+                  'text-main font-extrabold active':
+                    $route.path === '/about_us',
+                }"
+                @click="mobileMenuOpen = false"
+                >{{ $t("who us") }}</nuxt-link
               >
 
               <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                >{{ $t("Evaluation") }}</nuxt-link
+                to="offers"
+                class="text-sm font-normal leading-6 text-gray-900"
+                :class="{
+                  'text-main font-extrabold active': $route.path === '/offers',
+                }"
+                @click="mobileMenuOpen = false"
+                >{{ $t("Offers") }}</nuxt-link
               >
               <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                >{{ $t("Frequently Asked Questions") }}</nuxt-link
-              >
-              <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                >{{ $t("Contact us") }}</nuxt-link
+                to="Awards_and_Certificates"
+                class="text-sm font-normal leading-6 text-gray-900"
+                :class="{
+                  'text-main font-extrabold active':
+                    $route.path === '/Awards_and_Certificates',
+                }"
+                @click="mobileMenuOpen = false"
+                >{{ $t("awards and Certificate") }}</nuxt-link
               >
             </div>
+
             <div class="py-6 flex flex-col items-center gap-4">
               <div>
-                <v-btn class="!bg-main text-white !font-bold mx-10">
-                  {{ $t("Sign in") }}
-                </v-btn>
+                <nuxt-link to="/NewOrder">
+                  <v-btn
+                    class="!bg-main text-white !font-bold mx-10"
+                    @click="mobileMenuOpen = false"
+                  >
+                    {{ $t("Order Now") }}
+                  </v-btn>
+                </nuxt-link>
               </div>
               <div>
-                <v-menu open-on-hover>
+                <v-menu open-on-click>
                   <template v-slot:activator="{ props }">
                     <div v-bind="props">
-                      <span class="flex items-center">
+                      <span class="flex">
                         <div>
                           <div v-if="locale === 'ar'" class="d-flex">
-                            <img class="h-5 w-auto" src=" " />
+                            <img
+                              class="h-5 w-auto"
+                              src="/images/header/saudi_icon.svg"
+                            />
                             <v-icon>mdi-chevron-down</v-icon>
                           </div>
                           <div v-else class="d-flex">
                             <v-icon>mdi-chevron-down</v-icon>
-                            <img class="h-5 w-auto" src=" " />
+                            <img
+                              class="h-5 w-auto"
+                              src="/images/header/american_icon.svg"
+                            />
                           </div>
-
-                          <!-- Use an icon representing the American flag -->
                         </div>
                         <div>
                           <span v-if="locale === 'ar'">{{ $t("Arabic") }}</span>
-                          <span v-else class="mx-2">
-                            <!-- Remove this span and use an else statement -->
-                            {{ $t("English") }}
-                          </span>
+                          <span v-else class="mx-2">{{ $t("English") }}</span>
                         </div>
                       </span>
                     </div>
@@ -255,13 +305,15 @@
                     <v-list-item
                       v-for="lang in languages"
                       :key="lang.code"
-                      @click="setLocaleAndDirection(lang.code)"
+                      @click="
+                        setLocaleAndDirection(lang.code);
+                        mobileMenuOpen = false;
+                      "
                     >
                       <div class="flex flex-col items-center text-center">
-                        <v-list-item-title>
-                          {{ $t(lang.label) }}
-                        </v-list-item-title>
-                        <!-- Downward arrow -->
+                        <v-list-item-title>{{
+                          $t(lang.label)
+                        }}</v-list-item-title>
                       </div>
                     </v-list-item>
                   </v-list>

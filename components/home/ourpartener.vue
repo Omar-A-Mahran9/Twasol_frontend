@@ -4,21 +4,27 @@
       <v-col cols="12" sm="5"
         ><v-card elevation="0" flat>
           <v-card-item>
-            <v-card-title class="font-weight-bold text-second">
+            <v-card-title
+              class="font-weight-bold text-second sm:text-center md:text-start"
+            >
               <h1 class="text-2xl">
                 {{ $t("Our Partner") }}
               </h1>
             </v-card-title>
           </v-card-item>
 
-          <v-card-text class="text-justify">
-            <p class="leading-6">
+          <v-card-text class="text-justify md:text-start">
+            <p class="leading-6 md:text-start">
               {{ partener[locale] }}
             </p>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="7" class="d-flex flex-column gap-5">
+      <v-col
+        cols="12"
+        sm="7"
+        class="flex flex-column gap-5 justify-center px-7"
+      >
         <!-- Order Now button at the bottom and aligned to the end (right side) -->
         <nuxt-link to="/auth/login" class="d-flex justify-end mt-auto">
           <v-btn class="!bg-main text-white !font-bold">
