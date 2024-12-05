@@ -36,7 +36,7 @@
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <nuxt-link
-          to="/"
+          :to="localePath('/')"
           class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
             '!text-main font-bold font-extrabold active': $route.path === '/',
@@ -44,7 +44,7 @@
           >{{ $t("Home") }}</nuxt-link
         >
         <nuxt-link
-          to="/our_service"
+          :to="localePath('/our_service')"
           class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
             '!text-main font-bold  active': $route.path === '/our_service',
@@ -143,7 +143,7 @@
               <v-list-item
                 v-for="lang in languages"
                 :key="lang.code"
-                @click="setLocaleAndDirection(lang.code)"
+                @click="changeLang(lang.code)"
               >
                 <div class="flex flex-col items-center text-center">
                   <v-list-item-title>
@@ -310,7 +310,7 @@
                       v-for="lang in languages"
                       :key="lang.code"
                       @click="
-                        setLocaleAndDirection(lang.code);
+                        changeLang(lang.code);
                         mobileMenuOpen = false;
                       "
                     >
@@ -352,6 +352,8 @@ const languages = [
   { code: "ar", label: "Arabic", icon: "mdi-saudi-arabia" },
   { code: "en", label: "English", icon: "mdi-flag" },
 ];
+const localePath = useLocalePath();
+
 
 // Function to change locale and set the text direction
 function setLocaleAndDirection(lang) {
@@ -360,14 +362,32 @@ function setLocaleAndDirection(lang) {
   document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 }
 
-onMounted(() => {
-  const savedLocale = localStorage.getItem("locale") || "en"; // Default to "en" if not found
-  setLocale(savedLocale); // Apply locale
-  document.documentElement.setAttribute(
-    "dir",
-    savedLocale === "ar" ? "rtl" : "ltr"
-  ); // Apply direction
-});
+const changeLang = async (lang) => {
+  const newLang = lang;
+
+  // Update locale and store preference in localStorage
+  locale.value = newLang;
+  localStorage.setItem('preferredLang', newLang);
+  setLocale(newLang);
+
+  // Update HTML language and direction attributes
+  useHead({
+    htmlAttrs: {
+      lang: newLang,
+      dir: newLang === 'ar' ? 'rtl' : 'ltr',
+    },
+  });
+
+  // Redirect to the language-specific route
+  const route = useRoute();
+  const newPath = localePath({ path: route.path });
+  await navigateTo({
+    path: newPath,
+    query: route.query,
+  });
+};
+
+
 
 // Mobile menu control
 const mobileMenuOpen = ref(false);

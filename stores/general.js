@@ -78,4 +78,11 @@ export const GeneralStore = defineStore("general", () => {
     blogsData,
     awardsData,
   };
-});
+},
+{
+  persist: {
+    enabled: true,
+    storage: localStorage,
+  },
+}
+);
