@@ -120,7 +120,12 @@ const { locale } = useI18n(); // This will give you the current locale
 const validationErrors = ref({});
 const loading = ref(false);
 
-const { data, error } = await useFetch(`${config.public.apiBase}general`);
+const { data, error } = await useFetch(`${config.public.apiBase}general`, {
+  headers: {
+    "Content-Language": locale.value, // Include the current locale
+    Accept: "application/json", // Specify the desired response format
+  },
+});
 
 // Reactive state object
 const state = ref({

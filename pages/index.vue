@@ -14,6 +14,7 @@ import { ref } from "vue";
 import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
 store.getData();
+store.getaslidersData();
 </script>
 
 <style>

@@ -52,8 +52,6 @@
 import { ref } from "vue";
 import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
-import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
-const config = useRuntimeConfig();
 
 const { locale } = useI18n(); // This will give you the current locale
 const service = computed(() => {

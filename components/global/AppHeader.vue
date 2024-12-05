@@ -37,58 +37,62 @@
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <nuxt-link
           to="/"
-          class="text-sm leading-6"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active': $route.path === '/',
+            '!text-main font-bold font-extrabold active': $route.path === '/',
           }"
           >{{ $t("Home") }}</nuxt-link
         >
         <nuxt-link
           to="/our_service"
-          class="text-sm font-normal leading-6 text-gray-900"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active': $route.path === '/our_service',
+            '!text-main font-bold  active': $route.path === '/our_service',
           }"
           >{{ $t("Our Service") }}</nuxt-link
         >
         <nuxt-link
           to="/contact_us"
-          class="text-sm font-normal leading-6 text-gray-900"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active': $route.path === '/contact_us',
+            '!text-main font-bold font-extrabold active':
+              $route.path === '/contact_us',
           }"
           >{{ $t("Contact Us") }}</nuxt-link
         >
         <nuxt-link
           to="/blogs"
-          class="text-sm font-normal leading-6 text-gray-900"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active': $route.path === '/blogs',
+            '!text-main font-bold font-extrabold active':
+              $route.path === '/blogs',
           }"
           >{{ $t("Blogs") }}</nuxt-link
         >
         <nuxt-link
           to="/about_us"
-          class="text-sm font-normal leading-6 text-gray-900"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active': $route.path === '/about_us',
+            '!text-main font-bold font-extrabold active':
+              $route.path === '/about_us',
           }"
           >{{ $t("who us") }}</nuxt-link
         >
 
         <nuxt-link
           to="offers"
-          class="text-sm font-normal leading-6 text-gray-900"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active': $route.path === '/offers',
+            '!text-main font-bold font-extrabold active':
+              $route.path === '/offers',
           }"
           >{{ $t("Offers") }}</nuxt-link
         >
         <nuxt-link
           to="Awards_and_Certificates"
-          class="text-sm font-normal leading-6 text-gray-900"
+          class="text-lg leading-6 text-[#7F7F7F]"
           :class="{
-            'text-main font-extrabold active':
+            '!text-main font-bold font-extrabold active':
               $route.path === '/Awards_and_Certificates',
           }"
           >{{ $t("awards and Certificate") }}</nuxt-link

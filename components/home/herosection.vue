@@ -52,18 +52,24 @@
       </v-sheet>
     </v-carousel-item>
   </v-carousel>
+  <!-- {{ data }}
+  {{ locale }} -->
 </template>
 
 <script setup>
-const { locale } = useI18n(); // This will give you the current locale
+import { ref, watch } from "vue";
+import { useI18n } from "vue-i18n"; // Import useI18n for localization
+import { GeneralStore } from "@/stores/general";
 
-import { ref, onMounted } from "vue";
-const config = useRuntimeConfig(); // Ensure runtime config is set up correctly
-const cover = ref([]); // Initialize ref to store slider data
-const { data, error } = await useFetch(`${config.public.apiBase}sliders`);
-if (data) {
+const { locale } = useI18n(); // This will give you the current locale
+const store = GeneralStore();
+
+const cover = ref([]);
+
+// A function to transform slidersData into the desired structure
+const updateCover = () => {
   cover.value =
-    data?.value?.data?.map((item) => ({
+    store?.slidersData?.map((item) => ({
       title: {
         ar: item.title, // Assuming API provides a title
         en: item.title, // Adjust if English title is different
@@ -74,7 +80,16 @@ if (data) {
       },
       image: item.image, // Assuming API provides an image path
     })) || [];
-}
+};
+
+// Watch slidersData for changes and update cover accordingly
+watch(
+  () => store.slidersData,
+  () => {
+    updateCover();
+  },
+  { immediate: true } // Run immediately to populate initial data
+);
 </script>
 
 <style>

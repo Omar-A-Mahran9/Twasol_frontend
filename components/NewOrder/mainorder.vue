@@ -358,7 +358,12 @@ const Partenerdata = ref({
   BIC_Swift: "",
 });
 // Fetch data using useFetch
-const { data, error } = await useFetch(`${config.public.apiBase}general`);
+const { data, error } = await useFetch(`${config.public.apiBase}general`, {
+  headers: {
+    "Content-Language": locale.value, // Include the current locale
+    Accept: "application/json", // Specify the desired response format
+  },
+});
 
 // Update cities once data is available
 watchEffect(() => {

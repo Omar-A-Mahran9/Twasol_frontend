@@ -4,14 +4,15 @@
 
 @font-face {
   font-family: Cairo;
-  src: url(/fonts/NotoKufiArabic-Regular.ttf);
+  src: url(/fonts/DINNextLTArabic-Regular-3.ttf);
 }
 
 * {
   font-family: Cairo, sans-serif;
 }
 
-body, html {
+body,
+html {
   overflow-x: hidden;
   margin: 0;
   padding: 0;

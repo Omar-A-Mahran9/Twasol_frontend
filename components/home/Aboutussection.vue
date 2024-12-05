@@ -19,8 +19,8 @@
         </v-col>
 
         <v-col cols="12" sm="12" md="6" lg="6">
-          <v-row justify="end">
-            <v-col col="12" sm="12" md="9" lg="9">
+          <v-row justify="start mx-5">
+            <v-col col="12" sm="12" md="12" lg="12">
               <v-row>
                 <v-col>
                   <v-row class="mb-10">
@@ -51,7 +51,7 @@
                   </v-row>
                   <v-row>
                     <nuxt-link to="/about_us">
-                      <v-btn class="!bg-main text-white !font-bold mt-5">
+                      <v-btn class="!bg-main text-white !font-bold mt-10">
                         {{ $t("Show more") }}
                       </v-btn></nuxt-link
                     >

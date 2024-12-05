@@ -4,6 +4,7 @@ export const GeneralStore = defineStore("general", () => {
   const generalData = ref([]);
   const blogsData = ref([]);
   const awardsData = ref([]);
+  const slidersData = ref([]);
 
   const { locale } = useI18n(); // This will give you the current locale
 
@@ -52,10 +53,27 @@ export const GeneralStore = defineStore("general", () => {
     }
   };
 
+  const getaslidersData = async () => {
+    const { data, error } = await useFetch(`${config.public.apiBase}sliders`, {
+      headers: {
+        "Content-Language": locale.value, // Include the current locale
+        Accept: "application/json", // Specify the desired response format
+      },
+    });
+
+    if (!error.value) {
+      slidersData.value = data.value?.data;
+    } else {
+      console.error("Error fetching data:", error.value);
+    }
+  };
+
   return {
     getBlogsData,
     getData,
     getawardsData,
+    getaslidersData,
+    slidersData,
     generalData,
     blogsData,
     awardsData,
