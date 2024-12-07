@@ -1,7 +1,7 @@
 <template>
   <div id="client_evaluation" class="container my-16">
     <div>
-       <!-- Grid Layout -->
+      <!-- Grid Layout -->
       <v-row class="mx-2">
         <v-col
           v-for="(blog, index) in paginatedBlogs"
@@ -13,8 +13,8 @@
           <v-card
             :disabled="loading"
             :loading="loading"
-            class="mx-auto my-12 rounded-xl"
-            max-width="374"
+            class="mx-auto my-12 rounded-lg"
+            max-width="400"
           >
             <template v-slot:loader="{ isActive }">
               <v-progress-linear
@@ -32,7 +32,7 @@
             </v-card-item>
 
             <v-card-text>
-              <div>{{ truncateText(blog.description[locale], 80) }}</div>
+              <div>{{ truncateText(blog.description[locale], 150) }}</div>
             </v-card-text>
 
             <div class="d-flex justify-space-between">
@@ -40,12 +40,9 @@
                 <v-list-item-subtitle>{{ blog.date }}</v-list-item-subtitle>
               </v-list-item>
 
-              <v-card-actions>
-                <NuxtLink
-                  :to="`/blogs/blogdetails/${blog.id}`"
-                  class="text-main"
-                >
-                  <p class="text-main">{{ $t("Read more") }} >></p>
+              <v-card-actions class="bg-[#0E4B65]">
+                <NuxtLink :to="`/blogs/blogdetails/${blog.id}`">
+                  <p class="text-white">{{ $t("Read more") }} >></p>
                 </NuxtLink>
               </v-card-actions>
             </div>
@@ -54,23 +51,15 @@
       </v-row>
 
       <!-- Pagination -->
-      <div class="d-flex justify-content-center mt-4">
-        <button
-          class="btn btn-secondary"
-          :disabled="currentPage === 1"
-          @click="previousPage"
-        >
-          {{ $t("Previous") }}
-        </button>
-        <span class="mx-2">{{ currentPage }} / {{ totalPages }}</span>
-        <button
-          class="btn btn-secondary"
-          :disabled="currentPage === totalPages"
-          @click="nextPage"
-        >
-          {{ $t("Next") }}
-        </button>
-      </div>
+      <v-row justify="center" class="mt-4">
+        <v-pagination
+          v-model="currentPage"
+          :length="totalPages"
+          :total-visible="7"
+          circle
+          @input="onPageChange"
+        ></v-pagination>
+      </v-row>
     </div>
   </div>
 </template>
@@ -121,19 +110,6 @@ watch(
     currentPage.value = 1; // Reset to the first page
   }
 );
-
-// Pagination controls
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-  }
-};
-
-const previousPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
-};
 
 const truncateText = (text, maxLength) => {
   if (text.length > maxLength) {

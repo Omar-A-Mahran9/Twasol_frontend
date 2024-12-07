@@ -1,4 +1,3 @@
 <template>
-  جاري النشر
-  <!-- <NewOrderMainorder /> -->
+  <NewOrderMainorder />
 </template>

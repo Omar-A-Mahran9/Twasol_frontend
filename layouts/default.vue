@@ -6,11 +6,12 @@
   <AppFooter />
 </template>
 <script setup>
-const {locale , setLocale } = useI18n();
-
+const { locale, setLocale } = useI18n();
 
 onMounted(() => {
-  locale.value = localStorage.getItem("preferredLang") ? localStorage.getItem("preferredLang") : "ar";
+  locale.value = localStorage.getItem("preferredLang")
+    ? localStorage.getItem("preferredLang")
+    : "ar";
   useHead({
     htmlAttrs: {
       lang: locale.value == "en" ? "en" : "ar",

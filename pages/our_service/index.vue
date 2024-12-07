@@ -9,7 +9,7 @@
 
 <script setup>
 const page_data = {
-  title: "Our Service",
+  title: "Services",
   image: "/images/mainsec.png",
   pathes: {
     main: "Home",

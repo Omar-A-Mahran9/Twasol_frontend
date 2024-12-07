@@ -96,7 +96,33 @@ watch(
 .main-hero-container {
   height: 756px !important;
 }
+.v-carousel--hide-delimiter-background .v-carousel__controls {
+  background: #ffffff65 !important;
+  width: 150px;
+  border-radius: 25px 0 0px 25px;
+  transform: rotate(90deg);
+  bottom: 47px !important;
+  left: 0 !important;
+  /* margin-right: 8px; */
+}
+
+.v-carousel--hide-delimiter-background .v-carousel__controls:hover {
+  background: #ffffff !important;
+}
+
+.v-btn--icon.v-btn--density-default {
+  color: #1f9a3f !important;
+}
+
+.v-btn--active {
+  background-color: #1f9a3f !important;
+  height: 14px !important;
+  width: 30px !important;
+}
 @media (max-width: 750px) {
+  .v-carousel--hide-delimiter-background .v-carousel__controls {
+    display: none;
+  }
   .main-hero-container {
     height: 400px !important;
   }

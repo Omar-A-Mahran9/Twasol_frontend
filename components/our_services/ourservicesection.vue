@@ -1,51 +1,40 @@
 <template>
-  <div class="container py-16">
-    <v-container>
-      <v-row justify="center" align="start">
-        <v-col cols="12" sm="12" md="6" lg="6">
-          <v-row justify="start">
-            <v-col col="12" sm="12" md="10" lg="10">
-              <v-row>
-                <v-col>
-                  <v-row>
-                    <!-- Curved Line and Text in the same row -->
-                    <div class="flex items-center space-x-2 mt-5">
-                      <article>
-                        <p class="text-gray-700 text-justify leading-7">
-                          {{ service[locale] }}
-                        </p>
-                      </article>
-                    </div>
-                  </v-row>
-                  <v-row>
-                    <nuxt-link to="/NewOrder">
-                      <v-btn class="!bg-main text-white !font-bold mt-5">
-                        {{ $t("Order Now") }}
-                      </v-btn></nuxt-link
-                    >
-                  </v-row>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12" sm="12" md="6" lg="6">
-          <v-card rounded="xl">
-            <!-- YouTube iframe -->
-            <iframe
-              width="100%"
-              height="400"
-              frameborder="10"
-              style="border: 0"
-              src="https://www.youtube.com/embed/8RJ_DUKRdVs?si=H1LmiyPsmRcGAQci"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+  <div class="container py-10">
+    <v-row justify="center" align="start" class="p-4">
+      <v-col cols="12" sm="12" md="5" lg="5" class="md:me-10">
+        <!-- Curved Line and Text in the same row -->
+        <div class="flex flex-col items-start md:items-start space-x-2 mt-5">
+          <article>
+            <p class="text-gray-700 text-justify leading-7">
+              {{ service[locale] }}
+            </p>
+          </article>
+          <div>
+            <nuxt-link to="/NewOrder">
+              <v-btn class="!bg-main text-white !font-bold mt-5">
+                {{ $t("Order Now") }}
+              </v-btn></nuxt-link
             >
-            </iframe>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+          </div>
+        </div>
+      </v-col>
+
+      <v-col cols="12" sm="12" md="6" lg="6" class="mt-5 md:mt-1">
+        <v-card rounded="xl">
+          <!-- YouTube iframe -->
+          <iframe
+            width="100%"
+            frameborder="10"
+            style="border: 0"
+            src="https://www.youtube.com/embed/8RJ_DUKRdVs?si=H1LmiyPsmRcGAQci"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="responsive-iframe"
+          >
+          </iframe>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -65,4 +54,15 @@ const service = ref({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.responsive-iframe {
+  height: 250px; /* Default for mobile */
+}
+
+@media (min-width: 768px) {
+  /* For tablets and larger screens */
+  .responsive-iframe {
+    height: 400px;
+  }
+}
+</style>

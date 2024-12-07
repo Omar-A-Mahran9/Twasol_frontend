@@ -6,7 +6,7 @@
 <script setup>
 const page_data = {
   title: "Contact Us",
-  image: "/images/mainsec.png",
+  image: "/images/footer/main.svg",
   pathes: {
     main: "Home",
     sub: "Contact Us",

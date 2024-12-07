@@ -10,7 +10,7 @@ store.getawardsData();
 
 const page_data = {
   title: "awards and Certificate",
-  image: "/images/mainsec.png",
+  image: "/images/cleaan.svg",
   pathes: {
     main: "Home",
     sub: "awards and Certificate",

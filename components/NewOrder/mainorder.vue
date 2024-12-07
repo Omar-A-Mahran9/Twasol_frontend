@@ -17,15 +17,15 @@
           <v-row>
             <v-col cols="12" sm="4">
               <label for="textfield" class="font-weight-bold pb-3">{{
-                $t("Name and Nick name")
+                $t("Details")
               }}</label>
-              <v-text-field
+              <v-textarea
                 id="textfield"
-                :label="$t('Name and Nick name')"
+                :label="$t('Details')"
                 variant="outlined"
                 v-model="Partenerdata.name"
                 :error-messages="errors.name"
-              ></v-text-field>
+              ></v-textarea>
             </v-col>
 
             <v-col cols="12" sm="4">
@@ -331,6 +331,7 @@
 const config = useRuntimeConfig();
 
 import { ref } from "vue";
+const { locale } = useI18n(); // This will give you the current locale
 
 // Reactive variable for cities
 const cities = ref([]);

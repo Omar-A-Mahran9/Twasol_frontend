@@ -7,13 +7,12 @@
           v-for="(award, index) in paginatedawards"
           :key="award.id"
           cols="12"
-          md="4"
-          class="mb-4"
+          md="3"
         >
           <v-card
             :disabled="loading"
             :loading="loading"
-            class="mx-auto my-12 rounded-xl a4-paper-size"
+            class="mx-auto my-3 rounded-xl a4-paper-size"
             max-width="374"
           >
             <template v-slot:loader="{ isActive }">
@@ -24,7 +23,7 @@
                 indeterminate
               ></v-progress-linear>
             </template>
-            
+
             <a
               :data-src="award.imageUrl"
               class="cursor-pointer"
@@ -43,23 +42,15 @@
       </v-row>
 
       <!-- Pagination -->
-      <div class="d-flex justify-content-center mt-4">
-        <button
-          class="btn btn-secondary"
-          :disabled="currentPage === 1"
-          @click="previousPage"
-        >
-          {{ $t("Previous") }}
-        </button>
-        <span class="mx-2">{{ currentPage }} / {{ totalPages }}</span>
-        <button
-          class="btn btn-secondary"
-          :disabled="currentPage === totalPages"
-          @click="nextPage"
-        >
-          {{ $t("Next") }}
-        </button>
-      </div>
+      <v-row justify="center" class="mt-4">
+        <v-pagination
+          v-model="currentPage"
+          :length="totalPages"
+          :total-visible="7"
+          circle
+          @input="onPageChange"
+        ></v-pagination>
+      </v-row>
     </div>
   </div>
 </template>
@@ -93,7 +84,7 @@ const awards = computed(() =>
 );
 
 // Pagination setup
-const itemsPerPage = ref(6);
+const itemsPerPage = ref(8);
 const currentPage = ref(1);
 
 const totalPages = computed(() =>
@@ -165,5 +156,12 @@ button[disabled] {
   object-fit: contain; /* Ensures the image is scaled to fit without cropping */
   width: 100%; /* Make the image take up the full width of the card */
   height: 100%; /* Make the image take up the full height of the card */
+}
+.fancybox__content {
+  width: 70% !important;
+  height: 500px !important;
+}
+.fancybox__content img {
+  object-fit: cover;
 }
 </style>

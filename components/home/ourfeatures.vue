@@ -6,10 +6,10 @@
       >
         <div>
           <div
-            class="h-[130px] lg:h-[205px] xl:h-[205px] px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
+            class="h-[130px] lg:h-[205px] xl:h-[205px] px:1 md:px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
           >
             <div
-              class="w-40 flex-col justify-start items-center gap-4 inline-flex"
+              class="w-100 md:w-40 flex-col justify-start items-center gap-4 inline-flex"
             >
               <div class="w-20 h-20 relative">
                 <svg
@@ -50,7 +50,7 @@
         <!-- ... -->
         <div>
           <div
-            class="h-[130px] lg:h-[205px] xl:h-[205px] px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
+            class="h-[130px] lg:h-[205px] xl:h-[205px] px:1 md:px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
           >
             <div
               class="w-40 flex-col justify-start items-center gap-4 inline-flex"
@@ -98,7 +98,7 @@
 
         <div>
           <div
-            class="h-[130px] lg:h-[205px] xl:h-[205px] px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
+            class="h-[130px] lg:h-[205px] xl:h-[205px] px:1 md:px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
           >
             <div
               class="w-40 flex-col justify-start items-center gap-4 inline-flex"
@@ -141,7 +141,7 @@
 
         <div>
           <div
-            class="h-[130px] lg:h-[205px] xl:h-[205px] px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
+            class="h-[130px] lg:h-[205px] xl:h-[205px] px:1 md:px-16 pt-[63px] pb-[62px] bg-[#efefef] rounded-2xl shadow justify-center items-center flex animation"
           >
             <div
               class="w-40 flex-col justify-start items-center gap-4 inline-flex"
@@ -221,6 +221,7 @@
 /* Smooth transition on hover */
 .animation {
   position: relative; /* Ensure position for child element control */
+  width: 100%;
 }
 
 /* On hover, show the text with animation */
@@ -260,5 +261,50 @@
   color: white; /* Color change on hover */
   transform: translateY(-5px); /* Slight upward movement */
   font-size: 1.2rem; /* Slight font size increase */
+}
+@media (max-width: 750px) {
+  .animation {
+    position: relative; /* Ensure position for child element control */
+  }
+  .animation .text {
+    display: block;
+    font-size: medium;
+    margin-bottom: 40px;
+    margin: auto;
+    color: white;
+    text-align: center;
+  }
+
+  /* Hover effect for the background */
+  .animation {
+    background: linear-gradient(
+      270deg,
+      #4db773 0.03%,
+      #3ea7ad 50%,
+      #3199cc 99.97%
+    );
+    /* Optional: Add a slight scaling effect to the element itself */
+    transform: scale(1.05); /* Slight zoom in */
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth background and scale transition */
+  }
+  svg {
+    width: 70%;
+    margin: auto;
+    margin-top: 18px;
+  }
+  /* Hover effect for the icon (optional) */
+  .animation .icon path {
+    fill: #fff; /* Change the icon color to white on hover */
+    transition: fill 0.3s ease; /* Smooth color change */
+    width: 10% !important;
+  }
+
+  .animation .icon2 path {
+    fill: #fff;
+  }
+
+  .animation .icon3 path {
+    fill: #136387;
+  }
 }
 </style>

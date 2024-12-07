@@ -2,7 +2,7 @@
   <div class="bg-[#0E4B65] text-white py-11">
     <footer class="container">
       <v-row class="px-5">
-        <v-col class="hidden md:block" md="2">
+        <v-col class="hidden md:block" md="3">
           <div class="mb-5">
             <nuxt-link x to="/">
               <div v-if="locale === 'ar'" class="d-flex">
@@ -24,11 +24,11 @@
 
           <v-row align="center">
             <v-col>
-              <p class="font-light d-flex gap-2">
+              <div class="flex align-center gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="30"
-                  height="30"
+                  width="40"
+                  height="50"
                   viewBox="0 0 24 24"
                   fill="none"
                 >
@@ -44,18 +44,21 @@
                     </clipPath>
                   </defs>
                 </svg>
-                {{ getAddress() }}
-              </p></v-col
+
+                <p class="font-light d-flex gap-2">
+                  {{ getAddress() }}
+                </p>
+              </div></v-col
             >
           </v-row>
 
           <v-row align="center">
-            <v-col cols="8">
-              <p class="font-light d-flex gap-2">
+            <v-col cols="12">
+              <div class="flex align-center gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="40"
+                  height="40"
                   viewBox="0 0 24 24"
                   fill="none"
                 >
@@ -68,17 +71,19 @@
                     fill="#9DE5E0"
                   />
                 </svg>
-                {{ footer.email }}
-              </p></v-col
+                <p class="font-light d-flex gap-2">
+                  {{ footer.email }}
+                </p>
+              </div></v-col
             >
           </v-row>
           <v-row align="center">
             <v-col cols="8">
-              <p class="font-light d-flex gap-2">
+              <div class="flex align-center gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="50"
+                  height="30"
                   viewBox="0 0 24 24"
                   fill="none"
                 >
@@ -87,15 +92,17 @@
                     fill="#9DE5E0"
                   />
                 </svg>
-                {{ footer.phone }}
-              </p></v-col
+                <p class="font-light d-flex gap-2">
+                  {{ footer.phone }}
+                </p>
+              </div></v-col
             >
           </v-row>
         </v-col>
 
-        <v-col cols="12" md="2">
+        <v-col cols="12" md="1">
           <div @click="toggleMenu2" class="d-flex align-center justify-between">
-            <h1 class="font-light pb-5" style="font-size: 20px">
+            <h1 class="font-light pb-5 text-[#CFCFCF]" style="font-size: 20px">
               {{ $t("important links") }}
             </h1>
             <div
@@ -146,9 +153,9 @@
           </ul>
         </v-col>
 
-        <v-col cols="12" md="2">
+        <v-col cols="12" md="1">
           <div @click="toggleMenu2" class="d-flex align-center justify-between">
-            <h1 class="font-light pb-5" style="font-size: 20px">
+            <h1 class="font-light pb-5 text-[#CFCFCF]" style="font-size: 20px">
               {{ $t("important links") }}
             </h1>
             <div
@@ -216,7 +223,10 @@
         </v-col>
 
         <v-col cols="12" md="2">
-          <div @click="toggleMenu" class="d-flex align-center justify-between">
+          <div
+            @click="toggleMenu"
+            class="d-flex align-center justify-between text-[#CFCFCF]"
+          >
             <h1 class="pb-3" style="font-size: 20px">
               {{ $t("services") }}
             </h1>
@@ -261,7 +271,10 @@
         </v-col>
 
         <v-col cols="12" md="2">
-          <div @click="toggleMenu" class="d-flex align-center justify-between">
+          <div
+            @click="toggleMenu"
+            class="d-flex align-center justify-between text-[#CFCFCF]"
+          >
             <h1 class="pb-3" style="font-size: 20px">
               {{ $t("services") }}
             </h1>
@@ -305,10 +318,13 @@
           </ul>
         </v-col>
 
-        <v-col cols="12" md="2">
-          <div @click="toggleMenu3" class="d-flex align-center justify-between">
-            <h1 class="pb-6" style="font-size: 20px">
-              {{ $t("Contact Us") }}
+        <v-col cols="12" md="3">
+          <div
+            @click="toggleMenu3"
+            class="d-flex align-center justify-between text-[#CFCFCF]"
+          >
+            <h1 class="pb-3" style="font-size: 20px">
+              {{ $t("News") }}
             </h1>
             <div
               class="md:hidden"
@@ -321,12 +337,60 @@
               ]"
             ></div>
           </div>
-
           <div
             class="md:block"
             :class="{ hidden: !menuOpen3, block: menuOpen3 }"
           >
-            <v-row align="center">
+            <v-form class="mb-5">
+              <p class="text-white mb-3 text-lg">
+                {{ $t("Insert your Email to get all news") }}
+              </p>
+              <v-text-field
+                :label="$t('Email Address')"
+                variant="outlined"
+                hide-details="auto"
+                class="bg-white lighten-4 rounded"
+         
+              ></v-text-field>
+            </v-form>
+            <div class="d-flex">
+              <NuxtLink to="">
+                <img
+                  src="/images/footer/Facebook.png"
+                  class="img-fluid rounded-top"
+                  alt=""
+              /></NuxtLink>
+
+              <NuxtLink to="">
+                <img
+                  src="/images/footer/TWITER.png"
+                  class="img-fluid rounded-top"
+                  alt=""
+              /></NuxtLink>
+
+              <NuxtLink to="">
+                <img
+                  src="/images/footer/inst.png"
+                  class="img-fluid rounded-top"
+                  alt=""
+              /></NuxtLink>
+
+              <NuxtLink to="">
+                <img
+                  src="/images/footer/tiktok.png"
+                  class="img-fluid rounded-top"
+                  alt=""
+              /></NuxtLink>
+
+              <NuxtLink to="">
+                <img
+                  src="/images/footer/snapchat.png"
+                  class="img-fluid rounded-top"
+                  alt=""
+              /></NuxtLink>
+            </div>
+
+            <!-- <v-row align="center">
               <v-col cols="2">
                 <img
                   src="/images/footer/Facebook.svg"
@@ -381,7 +445,7 @@
                   {{ $t("whatsapp") }}
                 </p></v-col
               >
-            </v-row>
+            </v-row> -->
           </div></v-col
         >
       </v-row>

@@ -37,7 +37,8 @@
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <nuxt-link
           :to="localePath('/')"
-          class="text-lg leading-6 text-[#7F7F7F]"
+          class="leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold font-extrabold active': $route.path === '/',
           }"
@@ -46,6 +47,7 @@
         <nuxt-link
           :to="localePath('/our_service')"
           class="text-lg leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold  active': $route.path === '/our_service',
           }"
@@ -54,6 +56,7 @@
         <nuxt-link
           to="/contact_us"
           class="text-lg leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold font-extrabold active':
               $route.path === '/contact_us',
@@ -63,6 +66,7 @@
         <nuxt-link
           to="/blogs"
           class="text-lg leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold font-extrabold active':
               $route.path === '/blogs',
@@ -72,6 +76,7 @@
         <nuxt-link
           to="/about_us"
           class="text-lg leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold font-extrabold active':
               $route.path === '/about_us',
@@ -82,6 +87,7 @@
         <nuxt-link
           to="offers"
           class="text-lg leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold font-extrabold active':
               $route.path === '/offers',
@@ -91,6 +97,7 @@
         <nuxt-link
           to="Awards_and_Certificates"
           class="text-lg leading-6 text-[#7F7F7F]"
+          style="font-size: 18px"
           :class="{
             '!text-main font-bold font-extrabold active':
               $route.path === '/Awards_and_Certificates',
@@ -354,7 +361,6 @@ const languages = [
 ];
 const localePath = useLocalePath();
 
-
 // Function to change locale and set the text direction
 function setLocaleAndDirection(lang) {
   setLocale(lang);
@@ -367,14 +373,14 @@ const changeLang = async (lang) => {
 
   // Update locale and store preference in localStorage
   locale.value = newLang;
-  localStorage.setItem('preferredLang', newLang);
+  localStorage.setItem("preferredLang", newLang);
   setLocale(newLang);
 
   // Update HTML language and direction attributes
   useHead({
     htmlAttrs: {
       lang: newLang,
-      dir: newLang === 'ar' ? 'rtl' : 'ltr',
+      dir: newLang === "ar" ? "rtl" : "ltr",
     },
   });
 
@@ -386,8 +392,6 @@ const changeLang = async (lang) => {
     query: route.query,
   });
 };
-
-
 
 // Mobile menu control
 const mobileMenuOpen = ref(false);

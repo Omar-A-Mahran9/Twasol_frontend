@@ -11,7 +11,7 @@ store.getBlogsData();
 
 const page_data = {
   title: "Blogs",
-  image: "/images/mainsec.png",
+  image: "/images/Blog.svg",
   pathes: {
     main: "Home",
     sub: "Blogs",

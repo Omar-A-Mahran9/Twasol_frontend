@@ -18,7 +18,7 @@
           </v-card>
         </v-col>
 
-        <v-col cols="12" sm="12" md="6" lg="6">
+        <v-col cols="12" sm="12" md="6" lg="6" class="mt-5">
           <v-row justify="start mx-5">
             <v-col col="12" sm="12" md="12" lg="12">
               <v-row>
@@ -121,13 +121,13 @@ watch(
   z-index: 2; /* Ensures content sits on top of the overlay */
 }
 .responsive-iframe {
-  height: 200px; /* Default for mobile */
-}
+  height: 300px; /* Default for mobile */
+ }
 
 @media (min-width: 768px) {
   /* For tablets and larger screens */
   .responsive-iframe {
-    height: 400px;
+    height: 500px;
   }
 }
 
