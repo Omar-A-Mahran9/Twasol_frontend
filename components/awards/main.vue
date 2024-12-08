@@ -104,19 +104,6 @@ watch(
   }
 );
 
-// Pagination controls
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-  }
-};
-
-const previousPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
-};
-
 onMounted(() => {
   Fancybox.bind("[data-fancybox]", {
     //Custom options for all galleries

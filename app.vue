@@ -67,7 +67,7 @@ const { locale } = useI18n(); // Get the current locale
   position: fixed;
   bottom: 70px;
   inset-inline-start: 35px; /* 'start' based on LTR/RTL */
-  background-color: #bba764f6;
+  background-color: #1e9a3ff6;
   color: white;
   font-weight: bold;
   width: 300px;

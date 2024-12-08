@@ -12,38 +12,8 @@
           <v-card
             :disabled="loading"
             :loading="loading"
-            class="mx-auto my-3 rounded-xl a4-paper-size"
-            max-width="374"
-          >
-            <template v-slot:loader="{ isActive }">
-              <v-progress-linear
-                :active="isActive"
-                color="deep-purple"
-                height="4"
-                indeterminate
-              ></v-progress-linear>
-            </template>
-
-            <a
-              :data-src="offer.imageUrl"
-              class="cursor-pointer"
-              data-fancybox="gallery"
-              :data-caption="`Gallery A #0`"
-            >
-              <v-img
-                class="image-fill"
-                :src="offer.imageUrl"
-                alt="offer Image"
-              ></v-img>
-            </a>
-            <!-- Make the image fill the entire card without cropping -->
-          </v-card>
-
-          <v-card
-            :disabled="loading"
-            :loading="loading"
             class="mx-auto my-12 rounded-lg"
-            max-width="400"
+            max-width="500"
           >
             <template v-slot:loader="{ isActive }">
               <v-progress-linear
@@ -54,25 +24,30 @@
               ></v-progress-linear>
             </template>
 
-            <v-img height="250" :src="offer.imageUrl" cover></v-img>
+            <v-img height="200" :src="offer.imageUrl" cover></v-img>
 
-            <v-card-item>
-              <v-card-title>{{ offer.title[locale] }}</v-card-title>
+            <v-card-item class="text-second font-bold">
+              <v-card-title
+                ><p class="font-bold">{{ offer.title[locale] }}</p>
+              </v-card-title>
             </v-card-item>
 
             <v-card-text>
-              <div>{{ truncateText(offer.description[locale], 150) }}</div>
+              <div>{{ truncateText(offer.description[locale], 100) }}</div>
             </v-card-text>
 
-            <div class="d-flex justify-space-between">
-              <v-list-item density="compact" prepend-icon="mdi-calendar-blank">
-                <v-list-item-subtitle>{{ blog.date }}</v-list-item-subtitle>
-              </v-list-item>
+            <div class="d-flex justify-space-between mx-3">
+              <div>
+                <span class="font-bold text-2xl">{{ offer.price + " " }}</span
+                >{{ $t("SAR") }}
+              </div>
 
-              <v-card-actions class="bg-[#0E4B65]">
-                <NuxtLink :to="`/blogs/blogdetails/${offer.id}`">
-                  <p class="text-white">{{ $t("Read more") }} >></p>
-                </NuxtLink>
+              <v-card-actions>
+                <nuxt-link to="/NewOrder">
+                  <v-btn class="!bg-main text-white !font-bold">
+                    {{ $t("Order Now") }}
+                  </v-btn></nuxt-link
+                >
               </v-card-actions>
             </div>
           </v-card>
@@ -99,6 +74,7 @@ import { useI18n } from "vue-i18n";
 import { GeneralStore } from "@/stores/general";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+const { t, locale } = useI18n();
 
 const store = GeneralStore();
 const loading = ref(false);
@@ -129,6 +105,13 @@ const currentPage = ref(1);
 const totalPages = computed(() =>
   Math.ceil(offers.value.length / itemsPerPage.value)
 );
+
+const truncateText = (text, maxLength) => {
+  if (text?.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+  }
+  return text;
+};
 
 const paginatedoffers = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;

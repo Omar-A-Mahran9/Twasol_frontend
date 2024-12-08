@@ -348,106 +348,89 @@
               <v-text-field
                 :label="$t('Email Address')"
                 variant="outlined"
+                v-model="state.email"
+                :error-messages="validationErrors.email"
                 hide-details="auto"
                 class="bg-white lighten-4 rounded"
-         
-              ></v-text-field>
+              >
+                <template #append-inner>
+                  <v-btn
+                    @click="handleSubmit"
+                    type="button"
+                    :style="{
+                      backgroundColor: '#1F9A3F',
+                      color: 'white',
+                      height: '40px',
+                      fontSize: '16px',
+                      fontWeight: 'bold',
+                    }"
+                    :disabled="loading.value"
+                  >
+                    <v-progress-circular
+                      v-if="loading.value"
+                      indeterminate
+                      color="white"
+                      size="20"
+                      class="mr-2"
+                    ></v-progress-circular>
+                    {{ loading.value ? $t("Please wait...") : $t("Submit") }}
+                  </v-btn>
+                </template>
+              </v-text-field>
             </v-form>
+            <div>
+              <transition name="zoom" class="mb-3">
+                <div
+                  v-if="snackbar.visible"
+                  class="popup-overlay"
+                  @click.self="snackbar.visible = false"
+                >
+                  <v-alert
+                    v-model="snackbar.visible"
+                    color="success"
+                    icon="$success"
+                    :text="$t('follow up your mail to reach all news!')"
+                    class="popup-content"
+                  ></v-alert>
+                </div>
+              </transition>
+            </div>
             <div class="d-flex">
-              <NuxtLink to="">
+              <NuxtLink :to="footer.social.facebook">
                 <img
                   src="/images/footer/Facebook.png"
                   class="img-fluid rounded-top"
                   alt=""
               /></NuxtLink>
 
-              <NuxtLink to="">
+              <NuxtLink :to="footer.social.twitter">
                 <img
                   src="/images/footer/TWITER.png"
                   class="img-fluid rounded-top"
                   alt=""
               /></NuxtLink>
 
-              <NuxtLink to="">
+              <NuxtLink :to="footer.social.instgram">
                 <img
                   src="/images/footer/inst.png"
                   class="img-fluid rounded-top"
                   alt=""
               /></NuxtLink>
 
-              <NuxtLink to="">
+              <NuxtLink :to="footer.social.tiktok">
                 <img
                   src="/images/footer/tiktok.png"
                   class="img-fluid rounded-top"
                   alt=""
               /></NuxtLink>
-
-              <NuxtLink to="">
+              <NuxtLink :to="footer.social.sanpchat">
                 <img
                   src="/images/footer/snapchat.png"
                   class="img-fluid rounded-top"
                   alt=""
               /></NuxtLink>
-            </div>
-
-            <!-- <v-row align="center">
-              <v-col cols="2">
-                <img
-                  src="/images/footer/Facebook.svg"
-                  class="img-fluid rounded-top"
-                  alt=""
-                />
-              </v-col>
-              <v-col cols="8">
-                <p class="font-light">
-                  {{ $t("Facebook") }}
-                </p></v-col
-              >
-            </v-row>
-            <v-row align="center">
-              <v-col cols="2">
-                <img
-                  src="/images/footer/TWITER.svg"
-                  class="img-fluid rounded-top"
-                  alt=""
-                />
-              </v-col>
-              <v-col cols="8">
-                <p class="font-light">
-                  {{ $t("Twitter") }}
-                </p></v-col
-              >
-            </v-row>
-            <v-row align="center">
-              <v-col cols="2">
-                <img
-                  src="/images/footer/inst.svg"
-                  class="img-fluid rounded-top"
-                  alt=""
-                />
-              </v-col>
-              <v-col cols="8">
-                <p class="font-light">
-                  {{ $t("Instgram") }}
-                </p></v-col
-              >
-            </v-row>
-            <v-row align="center">
-              <v-col cols="2">
-                <img
-                  src="/images/footer/whats.svg"
-                  class="img-fluid rounded-top"
-                  alt=""
-                />
-              </v-col>
-              <v-col cols="8">
-                <p class="font-light">
-                  {{ $t("whatsapp") }}
-                </p></v-col
-              >
-            </v-row> -->
-          </div></v-col
-        >
+            </div></div
+        ></v-col>
       </v-row>
 
       <div class="mt-9 md:mt-0">
@@ -463,26 +446,40 @@
 <script setup>
 const { locale } = useI18n(); // This will give you the current locale
 import { ref } from "vue"; // Import ref from Vue
+import { GeneralStore } from "@/stores/general";
+import { email } from "@vuelidate/validators";
+import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
+const config = useRuntimeConfig();
+const store = GeneralStore();
 
 const footer = {
-  email: " info@tawasol-technology.com",
-  phone: "+966568623333",
+  email: store.generalData.email,
+  phone: store.generalData.sms_number,
   address: {
-    ar: "جدة - الذهب- المملكة العربيه السعودية",
-    en: "Gada-Gold-Saudi Arabia",
+    ar: store.generalData.address_ar,
+    en: store.generalData.address_en,
   },
   copyright: {
     en: "&copy; 2024 Tawasol. All rights reserved.",
     ar: "&copy; 2024 تواصل تكنولوجي. جميع الحقوق محفوظة.",
   },
   createdBy: {
-    // en: 'Created by <a href="https://www.linkedin.com/in/omar-a-mahran/" class="text-blue-400 hover:underline">Omar_A_Mahran</a>',
-    // ar: 'تم الإنشاء بواسطة <a href="https://www.linkedin.com/in/omar-a-mahran/" class="text-blue-400 hover:underline">عمر مهران</a>',
+    en: 'Created by <a href="https://www.linkedin.com/in/omar-a-mahran/" class="text-blue-400 hover:underline">Omar_A_Mahran</a>',
+    ar: 'تم الإنشاء بواسطة <a href="https://www.linkedin.com/in/omar-a-mahran/" class="text-blue-400 hover:underline">Omar_A_Mahran</a>',
+  },
+
+  social: {
+    facebook: store.generalData.facebook_link,
+    twitter: store.generalData.twitter_link,
+    tiktok: store.generalData.tiktok_link,
+    sanpchat: store.generalData.snapchat,
+    instgram: store.generalData.instagram_link,
   },
 };
 const getAddress = () => {
   return footer.address[locale.value] || footer.address["en"]; // Default to English if locale is not found
 };
+const validationErrors = ref({});
 
 const menuOpen = ref(false); // Reactive reference for menu state
 const menuOpen2 = ref(false); // Reactive reference for menu state
@@ -496,6 +493,79 @@ const toggleMenu2 = () => {
 };
 const toggleMenu3 = () => {
   menuOpen3.value = !menuOpen3.value; // Toggle menu state
+};
+const state = ref({
+  email: "",
+});
+
+const loading = ref(false);
+watch(
+  () => state.value.email,
+  (newValue) => {
+    if (validationErrors.value.email) {
+      validationErrors.value.email = null; // Clear validation error for name
+    }
+  }
+);
+
+const snackbar = ref({
+  visible: false,
+  message: "",
+  color: "success", // Default to green for success messages
+});
+const showSnackbar = (message, color = "success") => {
+  snackbar.value.message = message;
+  snackbar.value.color = color;
+  snackbar.value.visible = true;
+};
+const handleSubmit = async () => {
+  loading.value = true; // Set loading to true when the form is submitted
+
+  try {
+    validationErrors.value = {}; // Reset validation errors
+
+    const payload = {
+      email: state.value.email,
+    };
+
+    // Make the POST request
+    const { data, error } = await useFetch(
+      `${config.public.apiBase}news-letter`,
+      {
+        method: "POST",
+        body: payload,
+        headers: {
+          "content-language": locale,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (data.value) {
+      // Clear the form fields
+      state.value = {
+        email: null,
+      };
+      showSnackbar("Form submitted successfully!");
+      setTimeout(() => {
+        snackbar.value.visible = false;
+      }, 3000);
+    }
+
+    if (error.value) {
+      //   console.error("Error submitting form:", error.value.data);
+
+      // Check if validation errors are present
+      if (error.value.data.errors) {
+        validationErrors.value = error.value.data.errors; // Set validation errors
+      }
+      return;
+    }
+
+    loading.value = false;
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    loading.value = false; // Ensure loading is stopped in case of error
+  }
 };
 </script>
 <style scoped>

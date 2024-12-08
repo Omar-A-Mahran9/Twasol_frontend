@@ -116,7 +116,7 @@ import { ref } from "vue";
 
 import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
-("");
+
 const { locale } = useI18n(); // This will give you the current locale
 
 const validationErrors = ref({});

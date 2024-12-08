@@ -1,6 +1,10 @@
 {
   "Home": "الرئيسية",
   "Details": "المزيد من التفاصيل",
+  "SAR": "ر.س",
+  "follow up your mail to reach all news!": "تابع ايميلك ليصلك كل جديد عنا ",
+  "Personal information": "المعلومات الشخصية",
+  "name": "الاسم",
 
   "Why Tawasol Technology??": "لماذا تواصل التكنولوجيا؟؟",
 
@@ -12,6 +16,15 @@
   "cleaning and polishing marble": "جلي وتلميع الرخام",
   "General Service": "أعمال صيانة عامة",
   "Blogs": "مدونة",
+  "phone": "رقم الهاتف",
+  "The address": "العنوان بالتفصيل",
+  "Cities": "المدينة",
+  "Order": "طلب خدمة",
+  "Order Details": "تفاصيل الطلب",
+  "Thank you your request submited successfully will be contact with you soon": "شكرا لك , تم ارسال طلبك بنجاح سيتم التواصل معك قريبا ",
+  "more description": "تفاصيل أكثر",
+  "Send Request": "ارسال الطلب",
+
   "Facebook": "فيس بوك",
   "Twitter": "تويتر",
   "Profisional employee": "عمالة احترافية",
@@ -31,6 +44,7 @@
   "we part from": "نحن جزء من رحلة عملائنا ، نجاحك هو نجاحنا",
   "Your form has been successfully submitted!": "تم ارسال طلبك بنجاح سيتم التواصل معك قريباّ",
   "Success": "نجح الارسال",
+  "Next": "التالي",
 
   "Offers": "العروض",
   "Arabic": "العربية",

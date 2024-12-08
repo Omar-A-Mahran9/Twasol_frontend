@@ -1,5 +1,8 @@
 <template>
   <div class="container my-15">
+    {{ Orderdata }}
+    {{ date }}
+    {{ errors }}
     <v-stepper
       v-model="currentStep"
       :items="steps"
@@ -11,265 +14,121 @@
         <v-card flat>
           <template #title>
             <div class="text-center font-weight-bold mb-10">
-              {{ $t("Personal information and car details") }}
+              {{ $t("Personal information") }}
             </div>
           </template>
           <v-row>
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="6">
               <label for="textfield" class="font-weight-bold pb-3">{{
-                $t("Details")
-              }}</label>
-              <v-textarea
-                id="textfield"
-                :label="$t('Details')"
-                variant="outlined"
-                v-model="Partenerdata.name"
-                :error-messages="errors.name"
-              ></v-textarea>
-            </v-col>
-
-            <v-col cols="12" sm="4">
-              <label for="cites" class="font-weight-bold pb-3">{{
-                $t("Cities Service")
-              }}</label>
-              <v-select
-                id="cites"
-                :label="$t('Cities Service')"
-                :items="cities"
-                item-title="name"
-                item-value="id"
-                v-model="Partenerdata.city_ids"
-                multiple
-                variant="outlined"
-                :error-messages="errors.city_ids"
-              ></v-select>
-            </v-col>
-
-            <v-col cols="12" sm="4">
-              <label for="brand" class="font-weight-bold pb-3">{{
-                $t("Brand company")
-              }}</label>
-              <v-select
-                id="brand"
-                :label="$t('Brand company')"
-                :items="brands"
-                item-title="name"
-                item-value="id"
-                variant="outlined"
-                :error-messages="errors.brand_id"
-                v-model="Partenerdata.brand_id"
-              ></v-select>
-            </v-col>
-
-            <v-col cols="12" sm="4">
-              <label for="date" class="font-weight-bold pb-3">{{
-                $t("Car year")
-              }}</label>
-              <v-select
-                id="caryear"
-                :label="$t('Car year')"
-                :items="years"
-                variant="outlined"
-                v-model="Partenerdata.year"
-                :error-messages="errors.year"
-              ></v-select>
-            </v-col>
-
-            <v-col cols="12" sm="4">
-              <label for="carnumber" class="font-weight-bold pb-3">{{
-                $t("Car number")
+                $t("name")
               }}</label>
               <v-text-field
-                id="carnumber"
-                :label="$t('Car number')"
+                id="textfield"
+                :label="$t('name')"
                 variant="outlined"
-                v-model="Partenerdata.car_number"
-                :error-messages="errors.car_number"
+                v-model="Orderdata.name"
+                :error-messages="errors.name"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6">
+              <label for="textfield" class="font-weight-bold pb-3">{{
+                $t("phone")
+              }}</label>
+              <v-text-field
+                id="textfield"
+                :label="$t('phone')"
+                variant="outlined"
+                v-model="Orderdata.phone"
+                :error-messages="errors.phone"
               ></v-text-field>
             </v-col>
 
-            <v-col cols="12" sm="4">
-              <label for="carcolor" class="font-weight-bold pb-3">{{
-                $t("Car color")
+            <v-col cols="12" sm="6">
+              <label for="cites" class="font-weight-bold pb-3">{{
+                $t("Cities")
               }}</label>
               <v-select
-                id="carcolor"
-                :label="$t('Car color')"
-                :items="colors"
+                id="cites"
+                :label="$t('Cities')"
+                :items="cities"
                 item-title="name"
                 item-value="id"
+                v-model="Orderdata.city_id"
                 variant="outlined"
-                v-model="Partenerdata.color_id"
-                :error-messages="errors.color_id"
+                :error-messages="errors.city_id"
               ></v-select>
+            </v-col>
+            <v-col cols="12" sm="6">
+              <label for="textfield" class="font-weight-bold pb-3">{{
+                $t("The address")
+              }}</label>
+              <v-textarea
+                id="textfield"
+                :label="$t('The address')"
+                variant="outlined"
+                v-model="Orderdata.address"
+                :error-messages="errors.address"
+              ></v-textarea>
             </v-col>
           </v-row>
         </v-card>
       </template>
-
-      <!-- Step 2 -->
+      <!-- Step 3 -->
       <template v-slot:item.2>
         <v-card flat>
           <template #title>
             <div class="text-center font-weight-bold mb-10">
-              {{ $t("legal Details And Pricing") }}
+              {{ $t("Order Details") }}
             </div>
+            <v-col cols="12" sm="12">
+              <label for="Service" class="font-weight-bold pb-3">{{
+                $t("Service type")
+              }}</label>
+              <v-select
+                id="Service"
+                :label="$t('Service type')"
+                :items="services"
+                item-title="name"
+                item-value="id"
+                v-model="Orderdata.addon_service_id"
+                variant="outlined"
+                :error-messages="errors.addon_service_id"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" sm="12">
+              <label for="textfield" class="font-weight-bold pb-3">{{
+                $t("more description")
+              }}</label>
+              <v-textarea
+                id="textfield"
+                :label="$t('more description')"
+                variant="outlined"
+                v-model="Orderdata.description"
+                :error-messages="errors.description"
+              ></v-textarea>
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <label for="visited-date" class="font-weight-bold pb-3">{{
+                $t("Visited Date")
+              }}</label>
+              <v-date-picker
+                v-model="Orderdata.date"
+                :allowed-dates="allowedDates"
+                :error-messages="errors.date"
+                max="2030-01-01"
+                :min="currentDate"
+                style="
+                  background-color: rgb(13 75 101 / 6%);
+
+                  border-radius: 8px;
+                  padding: 2px;
+                  width: 100%;
+                  margin-top: 10px;
+                "
+              ></v-date-picker>
+            </v-col>
           </template>
-
-          <v-row>
-            <!-- First Column: ID Card -->
-            <v-col cols="12" sm="3" class="h-64 my-4">
-              <v-row class="h-18">
-                <!-- First Column: ID Card Label and Message -->
-                <v-col cols="12" align="center" justify="center" class="h-full">
-                  <h3 class="font-weight-bold">
-                    {{ $t("id card label") }}
-                  </h3>
-                  <p class="text-sm">
-                    {{ $t("upload id card message") }}
-                  </p>
-                </v-col>
-                <!-- Second Column: File Input -->
-                <v-col cols="12" align="center" justify="center" class="h-full">
-                  <v-file-input
-                    label="File input"
-                    variant="outlined"
-                    v-model="Partenerdata.Id_image"
-                    :error-messages="errors.Id_image"
-                  ></v-file-input>
-                </v-col>
-              </v-row>
-            </v-col>
-
-            <!-- Second Column: Profile Picture -->
-            <v-col cols="12" sm="3" class="h-64 my-4">
-              <v-row class="h-18">
-                <!-- First Column: ID Card Label and Message -->
-                <v-col cols="12" align="center" justify="center" class="h-full">
-                  <h3 class="font-weight-bold">
-                    {{ $t("profile picture label") }}
-                  </h3>
-                  <p class="text-sm">
-                    {{ $t("upload profile picture message") }}
-                  </p>
-                </v-col>
-
-                <v-col cols="12" align="center" justify="center" class="h-full">
-                  <v-file-input
-                    label="File input"
-                    variant="outlined"
-                    v-model="Partenerdata.Personal_image"
-                    :error-messages="errors.Personal_image"
-                  ></v-file-input>
-                </v-col>
-              </v-row>
-            </v-col>
-
-            <!-- Third Column: Driver License -->
-            <v-col cols="12" sm="3" class="h-64 my-4">
-              <v-row>
-                <v-col cols="12" align="center" justify="center">
-                  <h3 class="font-weight-bold">
-                    {{ $t("driver License Label") }}
-                  </h3>
-                  <p class="text-sm">
-                    {{ $t("upload Driver License Message") }}
-                  </p>
-                </v-col>
-
-                <v-col cols="12" align="center" justify="center">
-                  <v-file-input
-                    label="File input"
-                    variant="outlined"
-                    v-model="Partenerdata.License_image"
-                    :error-messages="errors.License_image"
-                  ></v-file-input>
-                </v-col>
-              </v-row>
-            </v-col>
-
-            <!-- Fourth Column: Car Form -->
-            <v-col cols="12" sm="3" class="h-64 my-4">
-              <v-row>
-                <v-col cols="12" align="center" justify="center">
-                  <h3 class="font-weight-bold">
-                    {{ $t("car Form Label") }}
-                  </h3>
-                  <p class="text-sm">{{ $t("upload Car Form Message") }}</p>
-                </v-col>
-
-                <v-col cols="12" align="center" justify="center">
-                  <v-file-input
-                    label="File input"
-                    variant="outlined"
-                    v-model="Partenerdata.car_paper_image"
-                    :error-messages="errors.car_paper_image"
-                  ></v-file-input>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card>
-      </template>
-
-      <!-- Step 3 -->
-      <template v-slot:item.3>
-        <v-card flat>
-          <template #title>
-            <div class="text-center font-weight-bold mb-10">
-              {{ $t("Payment Details") }}
-            </div>
-          </template>
-          <v-row>
-            <v-col cols="12" sm="4">
-              <label for="textfield" class="font-weight-bold pb-3">{{
-                $t("Person bank name")
-              }}</label>
-              <v-text-field
-                id="textfield"
-                :label="$t('Person bank name')"
-                variant="outlined"
-                v-model="Partenerdata.bank_owner_name"
-                :error-messages="errors.bank_owner_name"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="4">
-              <label for="textfield" class="font-weight-bold pb-3">{{
-                $t("IBAN Number")
-              }}</label>
-              <v-text-field
-                id="textfield"
-                :label="$t('IBAN Number')"
-                variant="outlined"
-                v-model="Partenerdata.iban_number"
-                :error-messages="errors.iban_number"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="4">
-              <label for="textfield" class="font-weight-bold pb-3">{{
-                $t("The address")
-              }}</label>
-              <v-text-field
-                id="textfield"
-                :label="$t('The address')"
-                variant="outlined"
-                v-model="Partenerdata.address"
-                :error-messages="errors.address"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="4">
-              <label for="textfield" class="font-weight-bold pb-3">{{
-                $t("BIC/SWIFT")
-              }}</label>
-              <v-text-field
-                id="textfield"
-                :label="$t('BIC/SWIFT')"
-                variant="outlined"
-                v-model="Partenerdata.BIC_Swift"
-                :error-messages="errors.BIC_Swift"
-              ></v-text-field>
-            </v-col>
-          </v-row>
         </v-card>
       </template>
       <template v-slot:actions>
@@ -301,19 +160,21 @@
       style="width: 100%; height: 50vh"
       v-if="submitted"
     >
-      <v-card style="width: 40%" class="pa-4 text-center">
+      <v-card style="width: 40%" class="pa-4 text-center" flat>
         <v-row justify="center" align="center">
           <v-col cols="12" class="d-flex justify-center">
-            <iframe
-              src="https://lottie.host/embed/9cbf49cc-0e6b-464a-b654-447772b1bea8/FMUniJTnfg.json"
-              style="border: none; width: 100%; height: 150px"
-            ></iframe>
+            <DotLottieVue
+              style="height: 500px; width: 500px"
+              autoplay
+              loop
+              src="https://lottie.host/f09c1baa-2201-49c2-bc81-c008931aaea2/9I4wIselTt.json"
+            />
           </v-col>
           <v-col cols="12">
             <p class="font-weight-bold">
               {{
                 $t(
-                  "Thank you for joining us! We will respond to your request as soon as possible."
+                  "Thank you your request submited successfully will be contact with you soon"
                 )
               }}
             </p>
@@ -325,67 +186,54 @@
       </v-card>
     </div>
   </div>
+  {{ "ddddd" }}
+  {{ currentStep }}
+  {{ formData }}
 </template>
 
 <script setup>
 const config = useRuntimeConfig();
 
 import { ref } from "vue";
-const { locale } = useI18n(); // This will give you the current locale
+import { GeneralStore } from "@/stores/general";
+import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
+
+const { t, locale } = useI18n();
+const store = GeneralStore();
 
 // Reactive variable for cities
+const services = ref([]);
 const cities = ref([]);
-const brands = ref([]);
-const colors = ref([]);
-const years = ref([]);
 const currentStep = ref(1); // Track the current step
-const steps = ref(["", "", ""]); // Placeholder for dynamically added steps
+const steps = ref(["", ""]); // Placeholder for dynamically added steps
 const errors = ref({}); // Store validation errors
 const submitted = ref(false);
-const Partenerdata = ref({
+const Orderdata = ref({
   name: "",
-  city_ids: [],
-  brand_id: "",
-  color_id: "",
-  year: "",
-  car_number: "",
-  Id_image: "",
-  Personal_image: "",
-  License_image: "",
-  car_paper_image: "",
-  bank_owner_name: "",
-  iban_number: "",
+  city_id: "",
+  phone: "",
   address: "",
-  BIC_Swift: "",
+  date: null,
+  addon_service_id: "",
+  description: "",
 });
-// Fetch data using useFetch
-const { data, error } = await useFetch(`${config.public.apiBase}general`, {
-  headers: {
-    "Content-Language": locale.value, // Include the current locale
-    Accept: "application/json", // Specify the desired response format
-  },
-});
-
-// Update cities once data is available
-watchEffect(() => {
-  if (data.value) {
-    cities.value = data.value.data.allCities || [];
-    brands.value = data.value.data.brands || [];
-    colors.value = data.value.data.colors || [];
-    const startYear = 2000;
-    const currentYear = new Date().getFullYear();
-
-    // Populate the years array from 2000 to the current year
-    years.value = Array.from(
-      { length: currentYear - startYear + 1 },
-      (_, index) => startYear + index
-    );
+watch(
+  () => Orderdata.value.date,
+  (newDate) => {
+    if (newDate) {
+      // Convert Date object to string and split it
+      Orderdata.value.date = new Date(newDate).toISOString().split("T")[0];
+    }
   }
-
-  if (error.value) {
-    console.error("Error fetching cities:", error.value);
-  }
-});
+);
+// Example: Format date if it exists
+if (Orderdata.value.date != null) {
+  Orderdata.value.date = Orderdata.value.date.split("T")[0];
+} else {
+  Orderdata.value.date = null; // Handle the case where the date is null
+}
+cities.value = store.generalData.allCities;
+services.value = store.generalData.services;
 
 // Move to the next step
 const nextStep = () => {
@@ -405,13 +253,14 @@ const previousStep = () => {
 const fetchData = async () => {
   // Construct the URL with the current step
   const step = currentStep.value;
-  const apiUrl = `${config.public.apiBase}bepartener/${step - 1}`;
-  if (step == 1) {
-    // Send a POST request to the backend
+  const apiUrl = `${config.public.apiBase}order/${step - 1}`;
+  if (step == 3) {
+    submitForm();
+  } else {
     try {
       const response = await useFetch(apiUrl, {
         method: "POST",
-        body: JSON.stringify(Partenerdata.value),
+        body: JSON.stringify(Orderdata.value),
         headers: {
           "Content-Type": "application/json",
         },
@@ -429,80 +278,35 @@ const fetchData = async () => {
       console.error("Error posting data:", error);
       alert("An error occurred. Please try again later.");
     }
-  } else if (step == 2) {
-    console.log("reems", Partenerdata.value.Id_image);
-    const formData = new FormData();
-
-    // Check if the image fields are not null before appending them
-    if (Partenerdata.value.Id_image) {
-      formData.append("Id_image", Partenerdata.value.Id_image);
-    }
-    if (Partenerdata.value.Personal_image) {
-      formData.append("Personal_image", Partenerdata.value.Personal_image);
-    }
-    if (Partenerdata.value.License_image) {
-      formData.append("License_image", Partenerdata.value.License_image);
-    }
-    if (Partenerdata.value.car_paper_image) {
-      formData.append("car_paper_image", Partenerdata.value.car_paper_image);
-    }
-
-    try {
-      const response = await useFetch(apiUrl, {
-        method: "POST",
-        body: formData,
-      });
-      // Check if the response contains errors
-
-      if (response.error.value !== null) {
-        const data = await response.error.value.data;
-        errors.value = data.errors;
-        return; // Stop the process and don't continue to the next step
-      }
-      errors.value = {};
-      currentStep.value++;
-    } catch (error) {
-      console.error("Error uploading images:", error);
-      alert("An error occurred. Please try again later.");
-    }
-  } else if (step == 3) {
-    submitForm();
   }
 };
+// Current date in "YYYY-MM-DD" format
+const currentDate = new Date().toISOString().split("T")[0];
 
+// Function to allow only specific dates (e.g., weekdays)
+const allowedDates = (date) => {
+  const day = new Date(date).getDay();
+  return day !== 0 && day !== 6; // Exclude Sundays (0) and Saturdays (6)
+};
 const submitForm = async () => {
   // Send a POST request to the backend
   const step = currentStep.value;
-  const apiUrl = `${config.public.apiBase}bepartener/${step - 1}`;
+  const apiUrl = `${config.public.apiBase}order/3`;
 
   // Create a new FormData object to send the form data with files
   const formData = new FormData();
 
   // Append normal form data fields
-  formData.append("name", Partenerdata.value.name);
-  formData.append("city_ids", JSON.stringify(Partenerdata.value.city_ids)); // If needed
-  formData.append("brand_id", Partenerdata.value.brand_id);
-  formData.append("color_id", Partenerdata.value.color_id);
-  formData.append("year", Partenerdata.value.year);
-  formData.append("car_number", Partenerdata.value.car_number);
-  formData.append("bank_owner_name", Partenerdata.value.bank_owner_name);
-  formData.append("iban_number", Partenerdata.value.iban_number);
-  formData.append("address", Partenerdata.value.address);
-  formData.append("BIC_Swift", Partenerdata.value.BIC_Swift);
-
-  // Append the image files (only if they exist)
-  if (Partenerdata.value.Id_image) {
-    formData.append("Id_image", Partenerdata.value.Id_image);
-  }
-  if (Partenerdata.value.Personal_image) {
-    formData.append("Personal_image", Partenerdata.value.Personal_image);
-  }
-  if (Partenerdata.value.License_image) {
-    formData.append("License_image", Partenerdata.value.License_image);
-  }
-  if (Partenerdata.value.car_paper_image) {
-    formData.append("car_paper_image", Partenerdata.value.car_paper_image);
-  }
+  formData.append("name", Orderdata.value.name);
+  formData.append("city_id", JSON.stringify(Orderdata.value.city_id)); // If needed
+  formData.append("phone", Orderdata.value.phone);
+  formData.append("address", Orderdata.value.address);
+  formData.append("date", Orderdata.value.date);
+  formData.append(
+    "addon_service_id",
+    JSON.stringify(Orderdata.value.addon_service_id)
+  ); // If needed
+  formData.append("description", Orderdata.value.description);
 
   try {
     // Make the POST request
@@ -555,12 +359,12 @@ const submitForm = async () => {
 
 .v-stepper-item--selected .v-stepper-item__avatar.v-avatar,
 .v-stepper-item--complete .v-stepper-item__avatar.v-avatar {
-  background: #bba764 !important;
+  background: #1e9a3f !important;
 }
 
 .v-stepper-header .v-divider {
   flex: none;
-  background-color: #bba764;
+  background-color: #1e9a3f;
   opacity: 100%;
   padding: 5px;
   width: 25%;
