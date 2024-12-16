@@ -41,7 +41,7 @@
               </v-list-item>
 
               <v-card-actions class="bg-[#0E4B65]">
-                <NuxtLink :to="`/blogs/blogdetails/${blog.id}`">
+                <NuxtLink  :to="localePath({ path: '/blogs/blogdetails', query:{id: blog.id} })">
                   <p class="text-white">{{ $t("Read more") }} >></p>
                 </NuxtLink>
               </v-card-actions>
@@ -72,6 +72,7 @@ import { GeneralStore } from "@/stores/general";
 const { t, locale } = useI18n();
 const store = GeneralStore();
 const loading = ref(false);
+const localePath = useLocalePath();
 
 // Reactive blogs data
 const blogs = computed(() =>
