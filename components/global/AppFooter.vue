@@ -100,7 +100,7 @@
           </v-row>
         </v-col>
 
-        <v-col cols="12" md="1">
+        <v-col cols="12" md="2">
           <div @click="toggleMenu2" class="d-flex align-center justify-between">
             <h1 class="font-light pb-5 text-[#CFCFCF]" style="font-size: 20px">
               {{ $t("important links") }}
@@ -153,7 +153,7 @@
           </ul>
         </v-col>
 
-        <v-col cols="12" md="1">
+        <v-col cols="12" md="2">
           <div @click="toggleMenu2" class="d-flex align-center justify-between">
             <h1 class="font-light pb-5 text-[#CFCFCF]" style="font-size: 20px">
               {{ $t("important links") }}
@@ -199,22 +199,24 @@
             </li>
             <li>
               <nuxt-link
-                to="why_us"
+                to="/about_us"
                 style="font-weight: bold"
                 class="-mx-3 block rounded-lg px-3 py-1 text-base leading-7 text-white"
                 :class="{
-                  'text-main font-extrabold active': $route.path === '/why_us',
+                  'text-main font-extrabold active':
+                    $route.path === '/about_us',
                 }"
                 >{{ $t("who us") }}</nuxt-link
               >
             </li>
             <li>
               <nuxt-link
-                to="why_us"
+                to="/partners"
                 style="font-weight: bold"
                 class="-mx-3 block rounded-lg px-3 py-1 text-base leading-7 text-white"
                 :class="{
-                  'text-main font-extrabold active': $route.path === '/why_us',
+                  'text-main font-extrabold active':
+                    $route.path === '/partners',
                 }"
                 >{{ $t("our Parteners") }}</nuxt-link
               >
@@ -246,13 +248,20 @@
             class="text-white md:block"
             :class="{ hidden: !menuOpen, block: menuOpen }"
           >
-            <li>
-              <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-1 text-base font-semibold leading-7 text-white"
-                >{{ $t("arrange garden") }}</nuxt-link
+            <ul>
+              <li
+                v-for="service in store.generalData.services"
+                :key="service.id"
               >
-            </li>
+                <nuxt-link
+                  :to="`/our_service/servicesdetails?id=${service.id}`"
+                  class="-mx-3 block rounded-lg px-3 py-1 text-base font-semibold leading-7 text-white"
+                >
+                  {{ $t(service.name) }}
+                </nuxt-link>
+              </li>
+            </ul>
+
             <li>
               <nuxt-link
                 to="#"
@@ -269,7 +278,7 @@
             </li>
           </ul>
         </v-col>
-
+<!-- 
         <v-col cols="12" md="2">
           <div
             @click="toggleMenu"
@@ -316,7 +325,7 @@
               >
             </li>
           </ul>
-        </v-col>
+        </v-col> -->
 
         <v-col cols="12" md="3">
           <div

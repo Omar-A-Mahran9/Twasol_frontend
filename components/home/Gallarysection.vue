@@ -79,27 +79,32 @@ import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
 
 const { locale } = useI18n(); // This will give you the current locale
+import { GeneralStore } from "@/stores/general";
+let store = GeneralStore();
+const gallary = store.generalData.gallary.map((gallar) => ({
+  image: gallar.image,
+}));
 
-const gallary = [
-  {
-    image: "/images/services/serviceone.png",
-  },
-  {
-    image: "/images/services/servicetwo.png",
-  },
-  {
-    image: "/images/services/servicethree.png",
-  },
-  {
-    image: "/images/services/servicefour.png",
-  },
-  {
-    image: "/images/services/servicefive.png",
-  },
-  {
-    image: "/images/services/servicesex.png",
-  },
-];
+// const gallary = [
+//   {
+//     image: "/images/services/serviceone.png",
+//   },
+//   {
+//     image: "/images/services/servicetwo.png",
+//   },
+//   {
+//     image: "/images/services/servicethree.png",
+//   },
+//   {
+//     image: "/images/services/servicefour.png",
+//   },
+//   {
+//     image: "/images/services/servicefive.png",
+//   },
+//   {
+//     image: "/images/services/servicesex.png",
+//   },
+// ];
 onMounted(() => {
   Fancybox.bind("[data-fancybox]", {
     //Custom options for all galleries
