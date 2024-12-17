@@ -12,7 +12,7 @@
             v-slot="{ isSelected, toggle }"
             class=""
           >
-            <NuxtLink :to="`our_service/servicesdetails/${n.id}`">
+            <NuxtLink :to="localePath({ path: '/our_service/servicesdetails', query:{id: n.id} })">
               <v-card
                 :class="['ma-4', selectedClass]"
                 color="grey-lighten-1"
@@ -50,6 +50,7 @@
 import { ref } from "vue";
 import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
+const localePath = useLocalePath();
 
 const { locale } = useI18n(); // This will give you the current locale
 const service = computed(() => {

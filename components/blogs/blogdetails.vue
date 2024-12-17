@@ -43,7 +43,7 @@ const route = useRoute();
 import { GeneralStore } from "@/stores/general";
 
 const store = GeneralStore();
-const parm = route.params.id; // Access the route parameter 'id'
+const parm = route.query.id; // Access the route parameter 'id'
 
 const blogdata = store?.blogsData[store?.blogsData?.length - parm]; // If you want to assign this to a reactive `ref` in Vue
 const blog = ref({

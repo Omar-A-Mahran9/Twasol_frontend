@@ -42,7 +42,7 @@
 import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
 const route = useRoute();
-const parm = route.params.id; // Access the route parameter 'id'
+const parm = route.query.id; // Access the route parameter 'id'
 let servicedata =
   store?.generalData?.services[store?.generalData?.services?.length - parm];
 // Define the modules you want to use in the swiper
