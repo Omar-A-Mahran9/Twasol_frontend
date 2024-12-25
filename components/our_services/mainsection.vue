@@ -34,6 +34,7 @@
       </v-col>
     </v-row>
   </div>
+  <gallary-byid :id="parm" />
 </template>
 
 <script setup>

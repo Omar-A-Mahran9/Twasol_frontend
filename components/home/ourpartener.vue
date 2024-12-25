@@ -1,5 +1,7 @@
 <template>
-  <div class="container mt-20 mb-20">
+  <v-container size="md" class="my-10">
+    <!-- Your content here -->
+
     <v-row>
       <v-col cols="12" sm="5"
         ><v-card elevation="0" flat>
@@ -28,34 +30,37 @@
           </v-btn>
         </nuxt-link>
         <!-- Content (Slider) -->
-
-        <v-slide-group
-          v-model="currentSlide"
-          class="border rounded-lg"
-          hide-delimiters
-        >
-          <v-slide-group-item
-            v-for="(logo, index) in partener.logos"
-            :key="index"
+        <div class="marquee-container">
+          <v-slide-group
+            v-model="currentSlide"
+            class="border rounded-lg"
+            hide-delimiters
           >
-            <v-card class="ma-4" width="90" flat>
-              <div class="d-flex fill-height align-center justify-center">
-                <v-img
-                  width="100px"
-                  height="100px"
-                  :src="logo.src"
-                  alt="Partner logo"
-                  max-height="100%"
-                  max-width="100%"
-                  contain
-                ></v-img>
+            <v-slide-group-item
+              v-for="(logo, index) in partener.logos"
+              :key="index"
+            >
+              <div class="marquee">
+                <v-card class="ma-4" width="90" flat>
+                  <div class="d-flex fill-height align-center justify-center">
+                    <v-img
+                      width="100px"
+                      height="100px"
+                      :src="logo.src"
+                      alt="Partner logo"
+                      max-height="100%"
+                      max-width="100%"
+                      contain
+                    ></v-img>
+                  </div>
+                </v-card>
               </div>
-            </v-card>
-          </v-slide-group-item>
-        </v-slide-group>
+            </v-slide-group-item>
+          </v-slide-group>
+        </div>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script setup>
@@ -73,5 +78,29 @@ const partener = {
 <style scoped>
 .v-slide-group__controls {
   display: none !important;
+}
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee .v-slide-group-item {
+  display: inline-block;
+  padding-right: 20px; /* Space between logos */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 </style>

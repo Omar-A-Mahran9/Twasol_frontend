@@ -1,8 +1,8 @@
 <template>
   <div id="contact_us" class="contact">
     <div class="container py-16">
-      <v-row justify="center" class="m-auto">
-        <v-col col="12" sm="12" md="6" lg="6">
+      <v-row justify="center" align="center" class="m-auto">
+        <v-col col="12" sm="12" md="5" lg="5">
           <h2 class="text-start text-4xl font-bold text-[#ffffff] mb-5">
             {{ $t("Contact Us") }}
           </h2>
@@ -100,16 +100,29 @@
             </div>
           </v-card>
         </v-col>
-        <v-col cols="12" sm="12" md="5" lg="5" class="mb-10 md:ms-10">
+        <v-col cols="12" sm="12" md="6" lg="6" class="mt-24 md:ms-10">
           <v-card rounded="xl">
-            <!-- Google Map iframe -->
+            <!-- Google Map Card -->
             <iframe
               class="map-iframe"
               frameborder="10"
               style="border: 0"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.356573014125!2d-122.41941648467988!3d37.77492937975887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808fc9feffbb%3A0xd651810fdc7d3a9e!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1578182242772!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d263!2d50.030599!3d26.4123369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e8a4444444:0xabcdef123456789!2s26%C2%B024'44.1%22N+50%C2%B001'53.7%22E!5e1!3m2!1sen!2sus!4v1234567890123"
             ></iframe>
           </v-card>
+
+          <!-- Button moved to the end -->
+          <div style="margin-top: 16px" class="flex justify-end">
+            <a
+              href="https://maps.app.goo.gl/oNJ6y5a2oQdsasfy7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <v-btn class="!bg-main text-white !font-bold pb-2">
+                {{ $t("go to location") }}
+              </v-btn>
+            </a>
+          </div>
         </v-col>
       </v-row>
     </div>
@@ -265,7 +278,7 @@ const handleSubmit = async () => {
 
 .map-iframe {
   width: 100%;
-  height: 600px;
+  height: 500px;
 }
 .v-messages__message {
   padding-top: 10px;

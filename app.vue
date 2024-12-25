@@ -6,7 +6,7 @@
 
     <div class="d-flex">
       <a
-        href="https://wa.me/+201003287527"
+        href="https://wa.me/+966539513320"
         target="_blank"
         class="whatsapp-link"
       >

@@ -72,7 +72,7 @@
                   />
                 </svg>
                 <p class="font-light d-flex gap-2">
-                  {{ footer.email }}
+                  <a :href="'mailto:' + footer.email">{{ footer.email }}</a>
                 </p>
               </div></v-col
             >
@@ -93,7 +93,7 @@
                   />
                 </svg>
                 <p class="font-light d-flex gap-2">
-                  {{ footer.phone }}
+                  <a :href="'tel:+966' + footer.phone">{{ footer.phone }}</a>
                 </p>
               </div></v-col
             >
@@ -221,6 +221,18 @@
                 >{{ $t("our Parteners") }}</nuxt-link
               >
             </li>
+            <li>
+              <nuxt-link
+                to="/gallary"
+                style="font-weight: bold"
+                class="-mx-3 block rounded-lg px-3 py-1 text-base leading-7 text-white"
+                :class="{
+                  'text-main font-extrabold active':
+                    $route.path === '/partners',
+                }"
+                >{{ $t("Gallary") }}</nuxt-link
+              >
+            </li>
           </ul>
         </v-col>
 
@@ -278,7 +290,7 @@
             </li>
           </ul>
         </v-col>
-<!-- 
+        <!-- 
         <v-col cols="12" md="2">
           <div
             @click="toggleMenu"

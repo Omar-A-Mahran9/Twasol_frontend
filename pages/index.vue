@@ -35,5 +35,4 @@ store.getaslidersData();
 .v-slide-group__next {
   display: none !important;
 }
-
 </style>

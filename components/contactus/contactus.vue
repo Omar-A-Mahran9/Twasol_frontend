@@ -1,6 +1,6 @@
 <template>
   <div id="contact_us">
-    <div class="container py-5">
+    <div class="container py-5 mt-15">
       <v-row justify="center" align="center p-2">
         <v-col cols="12" sm="12" md="5" lg="5" class="mb-10">
           <v-card class="bg-transparent">
@@ -96,15 +96,28 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="12" sm="12" md="6" lg="6">
+          <!-- Google Map Card -->
           <v-card rounded="xl">
-            <!-- Google Map iframe -->
             <iframe
               class="map-iframe"
               frameborder="10"
               style="border: 0"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.356573014125!2d-122.41941648467988!3d37.77492937975887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808fc9feffbb%3A0xd651810fdc7d3a9e!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1578182242772!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d263!2d50.030599!3d26.4123369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e8a4444444:0xabcdef123456789!2s26%C2%B024'44.1%22N+50%C2%B001'53.7%22E!5e1!3m2!1sen!2sus!4v1234567890123"
             ></iframe>
           </v-card>
+
+          <!-- Button moved to the end -->
+          <div style="margin-top: 16px" class="flex justify-end">
+            <a
+              href="https://maps.app.goo.gl/oNJ6y5a2oQdsasfy7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <v-btn class="!bg-main text-white !font-bold pb-2">
+                {{ $t("go to location") }}
+              </v-btn>
+            </a>
+          </div>
         </v-col>
       </v-row>
     </div>
