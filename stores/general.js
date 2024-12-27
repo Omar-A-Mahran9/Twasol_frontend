@@ -10,6 +10,7 @@ export const GeneralStore = defineStore(
     const slidersData = ref([]);
     const offersData = ref([]);
     const gallarydata = ref([]);
+    const gallarydatabyid = ref([]);
 
     const { locale } = useI18n(); // This will give you the current locale
 
@@ -60,6 +61,7 @@ export const GeneralStore = defineStore(
         console.error("Error fetching data:", error.value);
       }
     };
+
     const getgallaryData = async () => {
       const { data, error } = await useFetch(
         `${config.public.apiBase}galleris`,
@@ -73,6 +75,24 @@ export const GeneralStore = defineStore(
 
       if (!error.value) {
         gallarydata.value = data.value?.data;
+      } else {
+        console.error("Error fetching data:", error.value);
+      }
+    };
+
+    const getgallaryDatabyId = async (id) => {
+      const { data, error } = await useFetch(
+        `${config.public.apiBase}galleries/${id}`,
+        {
+          headers: {
+            "Content-Language": locale.value, // Include the current locale
+            Accept: "application/json", // Specify the desired response format
+          },
+        }
+      );
+
+      if (!error.value) {
+        gallarydatabyid.value = data.value?.data;
       } else {
         console.error("Error fetching data:", error.value);
       }
@@ -135,6 +155,7 @@ export const GeneralStore = defineStore(
       getpartenersData,
       getoffersData,
       getgallaryData,
+      getgallaryDatabyId,
       gallarydata,
       slidersData,
       generalData,
@@ -142,6 +163,7 @@ export const GeneralStore = defineStore(
       awardsData,
       partenersData,
       offersData,
+      gallarydatabyid,
     };
   },
   {

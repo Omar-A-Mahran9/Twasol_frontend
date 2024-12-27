@@ -1,8 +1,5 @@
 <template>
   <div class="container my-15">
-    {{ Orderdata }}
-    {{ date }}
-    {{ errors }}
     <v-stepper
       v-model="currentStep"
       :items="steps"
@@ -18,7 +15,7 @@
             </div>
           </template>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
               <label for="textfield" class="font-weight-bold pb-3">{{
                 $t("name")
               }}</label>
@@ -30,7 +27,21 @@
                 :error-messages="errors.name"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
+              <label for="email" class="font-weight-bold pb-3">{{
+                $t("email")
+              }}</label>
+              <v-text-field
+                id="email"
+                :label="$t('email')"
+                variant="outlined"
+                v-model="Orderdata.email"
+                :error-messages="errors.email"
+                type="email"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="4">
               <label for="textfield" class="font-weight-bold pb-3">{{
                 $t("phone")
               }}</label>
@@ -210,6 +221,7 @@ const errors = ref({}); // Store validation errors
 const submitted = ref(false);
 const Orderdata = ref({
   name: "",
+  email: "",
   city_id: "",
   phone: "",
   address: "",
@@ -298,6 +310,8 @@ const submitForm = async () => {
 
   // Append normal form data fields
   formData.append("name", Orderdata.value.name);
+  formData.append("email", Orderdata.value.email);
+
   formData.append("city_id", JSON.stringify(Orderdata.value.city_id)); // If needed
   formData.append("phone", Orderdata.value.phone);
   formData.append("address", Orderdata.value.address);
@@ -325,7 +339,9 @@ const submitForm = async () => {
       return; // Stop the process and don't continue to the next step
     }
 
-    errors.value = {}; // Clear errors
+    errors.value = {}; // Clear errors/
+
+    console.log(currentStep);
     currentStep.value++; // Move to the next step
 
     // Show success message and animation

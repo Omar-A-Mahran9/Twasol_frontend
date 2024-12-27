@@ -344,11 +344,6 @@ import { useI18n } from "vue-i18n"; // Ensure to import this from vue-i18n
 import {
   Dialog,
   DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
   PopoverGroup,
   PopoverPanel,
 } from "@headlessui/vue";

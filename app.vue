@@ -24,7 +24,24 @@
 <script setup>
 import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
 import { useI18n } from "vue-i18n"; // Importing i18n for language management
-const { locale } = useI18n(); // Get the current locale
+const { locale, t } = useI18n();
+
+const translatedTitle = computed(() => t("Tawasol Technology"));
+
+useHead({
+  title: translatedTitle.value, // Use the computed value
+  meta: [
+    {
+      name: "description",
+      content: t(
+        "A leading institution specialized in interior cleaning, cleaning glass facades for companies and towers, and pest control."
+      ), // Reactive translation
+    },
+  ],
+  bodyAttrs: {
+    class: "test",
+  },
+});
 </script>
 <style scoped>
 /* Add your styles if needed */

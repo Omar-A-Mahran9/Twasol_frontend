@@ -1,8 +1,14 @@
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
+  app: {
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+    },
+  },
   runtimeConfig: {
     public: {
-      apiBase: "https://admin.tawasol-technology.com/api/", // Public base URL
+      apiBase: "http://127.0.0.1:8000/api/", // Public base URL
     },
   },
   ssr: false,

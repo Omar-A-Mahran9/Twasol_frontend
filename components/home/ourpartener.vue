@@ -1,5 +1,5 @@
 <template>
-  <v-container size="md" class="my-10">
+  <div class="container my-15">
     <!-- Your content here -->
 
     <v-row>
@@ -60,7 +60,7 @@
         </div>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script setup>

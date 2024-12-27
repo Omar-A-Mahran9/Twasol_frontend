@@ -79,9 +79,14 @@ const props = defineProps({
     required: true,
   },
 });
+const route = useRoute(); // Access route to get the gallery id from URL
+
+// Fetch gallery data by id when the component is created
+store.getgallaryDatabyId(props.id);
+
 // Reactive gallaries data
 const gallaries = computed(() =>
-  store.gallarydata.map((gallary) => ({
+  store.gallarydatabyid.map((gallary) => ({
     id: gallary.id,
     title: {
       ar: gallary.name || "عنوان غير متوفر",
@@ -122,8 +127,6 @@ onMounted(() => {
     //Custom options for all galleries
   });
 });
-
-
 </script>
 
 <style scoped>
