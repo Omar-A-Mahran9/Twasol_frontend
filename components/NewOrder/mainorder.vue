@@ -123,6 +123,7 @@
               <label for="visited-date" class="font-weight-bold pb-3">{{
                 $t("Visited Date")
               }}</label>
+
               <v-date-picker
                 v-model="Orderdata.date"
                 :allowed-dates="allowedDates"
@@ -131,13 +132,15 @@
                 :min="currentDate"
                 style="
                   background-color: rgb(13 75 101 / 6%);
-
                   border-radius: 8px;
                   padding: 2px;
                   width: 100%;
                   margin-top: 10px;
                 "
               ></v-date-picker>
+
+              <!-- Show error messages with red color -->
+              <p v-if="errors.date" class="text-danger">{{ errors.date[0] }}</p>
             </v-col>
           </template>
         </v-card>
@@ -148,7 +151,7 @@
           <v-btn
             v-if="currentStep < steps.length"
             text
-            class="button-next"
+            class="button-next pb-2"
             @click="nextStep"
             :disabled="currentStep === steps.length"
           >
@@ -158,7 +161,7 @@
           <v-btn
             v-else-if="currentStep == steps.length"
             text
-            class="button-next"
+            class="button-next pb-2"
             @click="submitForm"
           >
             {{ $t("Send Request") }}
@@ -166,16 +169,11 @@
         </div>
       </template>
     </v-stepper>
-    <div
-      class="d-flex justify-center align-center my-10"
-      style="width: 100%; height: 50vh"
-      v-if="submitted"
-    >
+    <div class="d-flex justify-center align-center my-10" v-if="submitted">
       <v-card style="width: 40%" class="pa-4 text-center" flat>
         <v-row justify="center" align="center">
           <v-col cols="12" class="d-flex justify-center">
             <DotLottieVue
-              style="height: 500px; width: 500px"
               autoplay
               loop
               src="https://lottie.host/f09c1baa-2201-49c2-bc81-c008931aaea2/9I4wIselTt.json"
@@ -197,9 +195,6 @@
       </v-card>
     </div>
   </div>
-  {{ "ddddd" }}
-  {{ currentStep }}
-  {{ formData }}
 </template>
 
 <script setup>
@@ -358,13 +353,10 @@ const submitForm = async () => {
   box-shadow: none;
 }
 .button-next {
-  background-color: #1f9a3f;
-  color: #ffffff;
+  background-color: #1f9a3f !important;
+  color: #ffffff !important;
   font-weight: bold;
   width: 40%;
-  padding-top: 20px;
-  margin-top: 50px;
-  padding-bottom: 30px;
 }
 .v-stepper-item__avatar.v-avatar {
   background: #1f9a3f !important;
