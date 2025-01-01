@@ -145,7 +145,7 @@
             </li>
             <li>
               <nuxt-link
-                to="/about/#terms_and_conditions"
+                to="/NewOrder"
                 class="-mx-3 block rounded-lg px-3 py-1 text-base font-semibold leading-7 text-white"
                 >{{ $t("Order Now") }}</nuxt-link
               >
@@ -176,7 +176,7 @@
           >
             <li>
               <nuxt-link
-                to="blogs"
+                to="/blogs"
                 style="font-weight: bold"
                 class="-mx-3 block rounded-lg px-3 py-1 text-base leading-7 text-white"
                 :class="{
@@ -187,7 +187,7 @@
             </li>
             <li>
               <nuxt-link
-                to="Awards_and_Certificates"
+                to="/Awards_and_Certificates"
                 style="font-weight: bold"
                 class="-mx-3 block rounded-lg px-3 py-1 text-base leading-7 text-white"
                 :class="{
@@ -290,55 +290,6 @@
             </li>
           </ul>
         </v-col>
-        <!-- 
-        <v-col cols="12" md="2">
-          <div
-            @click="toggleMenu"
-            class="d-flex align-center justify-between text-[#CFCFCF]"
-          >
-            <h1 class="pb-3" style="font-size: 20px">
-              {{ $t("services") }}
-            </h1>
-            <div
-              class="md:hidden"
-              :class="[
-                'arrow',
-                {
-                  'arrow-up': menuOpen,
-                  'arrow-down': !menuOpen,
-                },
-              ]"
-            ></div>
-          </div>
-
-          <ul
-            class="text-white md:block"
-            :class="{ hidden: !menuOpen, block: menuOpen }"
-          >
-            <li>
-              <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-1 text-base font-semibold leading-7 text-white"
-                >{{ $t("arrange garden") }}</nuxt-link
-              >
-            </li>
-            <li>
-              <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-1 text-base font-semibold leading-7 text-white"
-                >{{ $t("cleaning and polishing marble") }}</nuxt-link
-              >
-            </li>
-            <li>
-              <nuxt-link
-                to="#"
-                class="-mx-3 block rounded-lg px-3 py-1 text-base font-semibold leading-7 text-white"
-                >{{ $t("General Service") }}</nuxt-link
-              >
-            </li>
-          </ul>
-        </v-col> -->
-
         <v-col cols="12" md="3">
           <div
             @click="toggleMenu3"
@@ -453,7 +404,9 @@
             </div></div
         ></v-col>
       </v-row>
-
+      <br />
+      <br />
+      <hr />
       <div class="mt-9 md:mt-0">
         <p class="text-sm text-center" v-html="footer.copyright[locale]"></p>
         <div class="text-sm text-center">

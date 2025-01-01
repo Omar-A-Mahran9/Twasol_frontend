@@ -1,36 +1,34 @@
 <template>
-  <div class="container py-16">
-    <v-row justify="center" align="start">
-      <v-col cols="12" sm="12" md="6" lg="6">
-        <v-row justify="start">
-          <v-col col="12" sm="12" md="10" lg="10">
-            <v-col>
-              <v-row>
-                <!-- Curved Line and Text in the same row -->
-                <div class="flex items-center space-x-2 mt-5">
-                  <article>
-                    <p class="text-gray-700 text-justify leading-7">
-                      {{ service[locale] }}
-                    </p>
-                  </article>
-                </div>
-              </v-row>
-              <v-row>
-                <nuxt-link to="/auth/login">
-                  <v-btn class="!bg-main text-white !font-bold mt-5">
-                    {{ $t("Order Now") }}
-                  </v-btn></nuxt-link
-                >
-              </v-row>
-            </v-col>
-          </v-col>
-        </v-row>
-      </v-col>
+  <div class="container py-10 md:py-16">
+    <v-row justify="center" class="px-5 md:px-1">
+      <!-- Text Section (Left Side) -->
+      <v-col cols="12" sm="6" md="6" lg="6">
+        <!-- Curved Line and Text in the same row -->
+        <div class="flex items-center space-x-2 mt-5">
+          <article>
+            <p class="text-gray-700 text-justify leading-7">
+              {{ service[locale] }}
+            </p>
+          </article>
+        </div>
 
-      <v-col cols="12" sm="12" md="6" lg="6" class="flex justify-end">
-        <v-card rounded="xl" flat width="400">
-          <v-img :src="service?.image" class="custom-image"></v-img>
-        </v-card>
+        <nuxt-link to="/NewOrder">
+            <v-btn class="!bg-main text-white !font-bold mt-5">
+              {{ $t("Order Now") }}
+            </v-btn></nuxt-link
+          >
+      </v-col>
+      <v-spacer></v-spacer>
+      <!-- Image Section (Right Side) -->
+      <!-- Image Section (Right Side) -->
+      <v-col cols="12" sm="4" md="4" lg="4" class="flex justify-end">
+        <v-img
+          gradient="to bottom right, rgba(0, 255, 0, 0.05), rgba(100, 228, 220, 0.25)"
+          aspect-ratio="1"
+          rounded="xl"
+          cover
+          :src="service?.image"
+        ></v-img>
       </v-col>
     </v-row>
   </div>
@@ -57,11 +55,3 @@ const service = ref({
   image: servicedata?.image,
 });
 </script>
-
-<style scoped>
-.custom-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Makes the image fill the card */
-}
-</style>

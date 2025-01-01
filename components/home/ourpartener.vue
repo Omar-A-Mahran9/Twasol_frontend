@@ -22,7 +22,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="7" class="flex flex-column gap-5">
+      <v-col cols="12" sm="7" class="flex flex-column gap-5 px-6">
         <!-- Order Now button at the bottom and aligned to the end (right side) -->
         <nuxt-link to="/partners" class="flex justify-end">
           <v-btn class="!bg-main text-white !font-bold">

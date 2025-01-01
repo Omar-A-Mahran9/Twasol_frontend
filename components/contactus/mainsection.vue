@@ -31,15 +31,14 @@
       </v-col>
       <v-col cols="12" sm="12" md="6" lg="6">
         <v-card rounded="xl">
-          <!-- YouTube iframe -->
           <iframe
             width="100%"
-            height="400"
             frameborder="10"
+            src="https://www.youtube.com/embed/9p1k_iNSJ9Q?si=PwoPCo3hP2Z4T-k8"
             style="border: 0"
-            src="https://www.youtube.com/embed/LlYGybIfP0o?si=u9vQ6EO004PUXv3u"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
+            class="responsive-iframe"
           >
           </iframe>
         </v-card>

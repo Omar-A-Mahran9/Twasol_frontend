@@ -361,7 +361,7 @@ const submitForm = async () => {
 .v-stepper-item__avatar.v-avatar {
   background: #1f9a3f !important;
   font-size: 20px;
-  padding-top: 5px;
+  padding-bottom: 3px;
   font-weight: bold;
 }
 

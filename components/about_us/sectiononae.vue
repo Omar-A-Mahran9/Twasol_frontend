@@ -1,35 +1,24 @@
 <template>
   <div class="container py-16">
     <v-row justify="center" align="start">
-      <v-col cols="12" sm="12" md="6" lg="6">
-        <v-row justify="start">
-          <v-col col="12" sm="12" md="10" lg="10">
-            <v-row>
-              <v-col>
-                <v-row>
-                  <!-- Curved Line and Text in the same row -->
-                  <div class="flex items-center space-x-2 mt-5">
-                    <article>
-                      <p
-                        class="text-gray-700 text-justify leading-7"
-                        v-html="aboutus[locale]"
-                      ></p>
-                    </article>
-                  </div>
-                </v-row>
-                <v-row>
-                  <nuxt-link to="/NewOrder">
-                    <v-btn class="!bg-main text-white !font-bold mt-5">
-                      {{ $t("Order Now") }}
-                    </v-btn></nuxt-link
-                  >
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
+      <v-col cols="12" sm="12" md="6" lg="6" class="px-5">
+        <!-- Curved Line and Text in the same row -->
+        <div class="flex items-center space-x-2 mt-5">
+          <article>
+            <p
+              class="text-gray-700 text-justify leading-7"
+              v-html="aboutus[locale]"
+            ></p>
+          </article>
+        </div>
+
+        <nuxt-link to="/NewOrder">
+          <v-btn class="!bg-main text-white !font-bold mt-5">
+            {{ $t("Order Now") }}
+          </v-btn></nuxt-link
+        >
       </v-col>
-      <v-col cols="12" sm="12" md="6" lg="6">
+      <v-col cols="12" sm="12" md="6" lg="6" class="px-5">
         <v-card rounded="xl">
           <!-- YouTube iframe -->
           <iframe

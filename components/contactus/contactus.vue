@@ -6,6 +6,14 @@
           <v-card class="bg-transparent">
             <v-form @submit.prevent="handleSubmit">
               <v-container>
+                <v-col cols="12" md="12">
+                  <input
+                    type="hidden"
+                    v-model="state.main_contactUs"
+                    name="main_contactUs"
+                    value="true"
+                  />
+                </v-col>
                 <v-row>
                   <v-col cols="12" md="12">
                     <v-text-field
@@ -43,13 +51,14 @@
 
                   <v-col cols="6" md="6">
                     <v-select
-                      id="cites"
+                      id="Service"
                       :label="$t('Service type')"
-                      :items="[]"
+                      :items="services"
                       item-title="name"
                       item-value="id"
-                      multiple
+                      v-model="state.addon_service_id"
                       variant="outlined"
+                      :error-messages="validationErrors.addon_service_id"
                     ></v-select>
                   </v-col>
 
@@ -92,6 +101,24 @@
                 </v-row>
               </v-container>
             </v-form>
+            <div>
+              <transition name="zoom">
+                <div
+                  v-if="snackbar.visible"
+                  class="popup-overlay"
+                  @click.self="snackbar.visible = false"
+                >
+                  <v-alert
+                    v-model="snackbar.visible"
+                    color="success"
+                    icon="$success"
+                    :title="$t('Success')"
+                    :text="$t('Your form has been successfully submitted!')"
+                    class="popup-content"
+                  ></v-alert>
+                </div>
+              </transition>
+            </div>
           </v-card>
         </v-col>
         <v-spacer></v-spacer>
@@ -129,18 +156,30 @@ import { ref } from "vue";
 
 import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
+const store = GeneralStore();
 
 const { locale } = useI18n(); // This will give you the current locale
 
 const validationErrors = ref({});
 const loading = ref(false);
-
+const services = ref([]);
+const snackbar = ref({
+  visible: false,
+  message: "",
+  color: "success", // Default to green for success messages
+});
+const showSnackbar = (message, color = "success") => {
+  snackbar.value.message = message;
+  snackbar.value.color = color;
+  snackbar.value.visible = true;
+};
 const { data, error } = await useFetch(`${config.public.apiBase}general`, {
   headers: {
     "Content-Language": locale.value, // Include the current locale
     Accept: "application/json", // Specify the desired response format
   },
 });
+services.value = store.generalData.services;
 
 // Reactive state object
 const state = ref({
@@ -148,7 +187,25 @@ const state = ref({
   email: "",
   Whatsapp: "",
   message: "",
+  addon_service_id: "",
+  main_contactUs: false,
 });
+watch(
+  () => state.value.addon_service_id,
+  (newValue) => {
+    if (validationErrors.value.addon_service_id) {
+      validationErrors.value.addon_service_id = null; // Clear validation error for name
+    }
+  }
+);
+watch(
+  () => state.value.main_contactUs,
+  (newValue) => {
+    if (validationErrors.value.main_contactUs) {
+      validationErrors.value.main_contactUs = null; // Clear validation error for name
+    }
+  }
+);
 
 watch(
   () => state.value.name,
@@ -197,6 +254,8 @@ const handleSubmit = async () => {
       email: state.value.email,
       phone: state.value.Whatsapp,
       message: state.value.message,
+      addon_service_id: state.value.addon_service_id,
+      main_contactUs: state.value.main_contactUs,
     };
 
     // Make the POST request
@@ -220,7 +279,10 @@ const handleSubmit = async () => {
         Whatsapp: null,
         message: null,
       };
-      alert("success");
+      showSnackbar("Form submitted successfully!");
+      setTimeout(() => {
+        snackbar.value.visible = false;
+      }, 3000);
     }
 
     if (error.value) {

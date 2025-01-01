@@ -5,42 +5,56 @@
         <h2 class="text-center text-4xl font-bold text-[#1C95CA] mb-5">
           {{ $t("Our Service") }}
         </h2>
-        <v-slide-group v-model="model" center-active class="m-auto">
-          <v-slide-group-item
-            v-for="n in service"
-            :key="n"
-            v-slot="{ isSelected, toggle }"
-            class=""
-          >
-            <NuxtLink :to="localePath({ path: '/our_service/servicesdetails', query:{id: n.id} })">
-              <v-card
-                :class="['ma-4', selectedClass]"
-                color="grey-lighten-1"
-                :style="{
-                  background:
-                    'linear-gradient(270deg, #4DB773 0.03%, #3EA7AD 50%, #3199CC 99.97%)',
-                  borderRadius: '16px',
-                }"
-                width="200"
-                height="200"
-                @click="toggle"
+        <v-sheet class="bg-transparent" flat>
+          <v-row class="ma-4" align="center" justify="center">
+            <v-col
+              v-for="n in service"
+              :key="n"
+              cols="6"
+              sm="6"
+              md="2"
+              lg="2"
+              :class="['pa-2']"
+              align="center"
+            >
+              <NuxtLink
+                :to="
+                  localePath({
+                    path: '/our_service/servicesdetails',
+                    query: { id: n.id },
+                  })
+                "
               >
-                <v-img height="77%" :src="n.image" cover class="zoom-effect">
-                </v-img>
-
-                <v-card-title
-                  class="text-white text-center d-flex justify-center align-center text-sm font-bold"
+                <v-card
+                  color="grey-lighten-1"
+                  :style="{
+                    background:
+                      'linear-gradient(270deg, #4DB773 0.03%, #3EA7AD 50%, #3199CC 99.97%)',
+                    borderRadius: '16px',
+                  }"
+                  width="100%"
+                  height="220"
+                  @click="toggle"
                 >
-                  <p class="text-sm font-bold">
-                    {{ n.title[locale] }}
-                  </p>
-                </v-card-title>
-              </v-card>
-            </NuxtLink>
-          </v-slide-group-item>
-        </v-slide-group>
+                  <v-img
+                    height="77%"
+                    :src="n.image"
+                    cover
+                    class="zoom-effect"
+                  ></v-img>
 
-        <!-- {{ store?.generalData?.services }} -->
+                  <v-card-title
+                    class="text-white text-center d-flex justify-center align-center text-sm font-bold"
+                  >
+                    <p class="text-sm font-bold wrap-text">
+                      {{ n.title[locale] }}
+                    </p>
+                  </v-card-title>
+                </v-card>
+              </NuxtLink>
+            </v-col>
+          </v-row>
+        </v-sheet>
       </div>
     </div>
   </div>
@@ -124,5 +138,34 @@ const service = computed(() => {
 
 .zoom-effect:hover {
   transform: scale(1.1); /* Zoom in when hovering */
+}
+.wrap-text {
+  word-wrap: break-word; /* This allows long words to break and wrap to the next line */
+  word-break: break-word; /* This helps to prevent overflow and break text as needed */
+  white-space: normal; /* Ensures text will wrap */
+  text-align: center; /* Keeps the text centered */
+}
+/* Marquee animation */
+.marquee-text {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-text p {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+  padding-left: 100%; /* Start from the right edge */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* Start from the right */
+  }
+  100% {
+    transform: translateX(-100%); /* End at the left */
+  }
 }
 </style>

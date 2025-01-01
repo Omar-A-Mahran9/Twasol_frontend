@@ -121,7 +121,7 @@ watch(
   z-index: 2; /* Ensures content sits on top of the overlay */
 }
 .responsive-iframe {
-  height: 300px; /* Default for mobile */
+  height: 200px; /* Default for mobile */
  }
 
 @media (min-width: 768px) {

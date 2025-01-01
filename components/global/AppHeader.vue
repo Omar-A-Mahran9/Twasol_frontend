@@ -85,7 +85,7 @@
         >
 
         <nuxt-link
-          to="offers"
+          to="/offers"
           class="text-lg leading-6 text-[#7F7F7F]"
           style="font-size: 18px"
           :class="{
@@ -95,7 +95,7 @@
           >{{ $t("Offers") }}</nuxt-link
         >
         <nuxt-link
-          to="Awards_and_Certificates"
+          to="/Awards_and_Certificates"
           class="text-lg leading-6 text-[#7F7F7F]"
           style="font-size: 18px"
           :class="{

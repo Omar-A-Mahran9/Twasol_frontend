@@ -7,16 +7,11 @@
         </h2>
         <v-sheet class="bg-transparent w-100">
           <v-container fluid>
-            <v-row
-              justify="center"
-              align="center"
-              class="pa-4"
-              style="row-gap: 20px; column-gap: 20px"
-            >
+            <v-row justify="center" align="center" class="pa-4">
               <v-col
                 v-for="n in service"
                 :key="n.id"
-                cols="12"
+                cols="6"
                 sm="4"
                 md="4"
                 lg="2"
@@ -28,6 +23,7 @@
                     :style="{
                       background: '#F0F0F0',
                       borderRadius: '16px',
+                      width: '100%',
                     }"
                     class="center-card"
                   >

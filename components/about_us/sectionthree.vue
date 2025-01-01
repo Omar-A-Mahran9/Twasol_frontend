@@ -22,7 +22,7 @@
             ></p>
           </article>
 
-          <nuxt-link to="/auth/login">
+          <nuxt-link to="/NewOrder">
             <v-btn class="!bg-main text-white !font-bold mt-5">
               {{ $t("Order Now") }}
             </v-btn></nuxt-link
