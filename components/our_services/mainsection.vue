@@ -5,18 +5,17 @@
       <v-col cols="12" sm="6" md="6" lg="6">
         <!-- Curved Line and Text in the same row -->
         <div class="flex items-center space-x-2 mt-5">
-          <article>
-            <p class="text-gray-700 text-justify leading-7">
-              {{ service[locale] }}
-            </p>
-          </article>
+          <div
+              class="text-gray-700 text-justify leading-7"
+              v-html="service[locale]"
+            ></div>
         </div>
 
         <nuxt-link to="/NewOrder">
-            <v-btn class="!bg-main text-white !font-bold mt-5">
-              {{ $t("Order Now") }}
-            </v-btn></nuxt-link
-          >
+          <v-btn class="!bg-main text-white !font-bold mt-5">
+            {{ $t("Order Now") }}
+          </v-btn></nuxt-link
+        >
       </v-col>
       <v-spacer></v-spacer>
       <!-- Image Section (Right Side) -->
@@ -27,6 +26,7 @@
           aspect-ratio="1"
           rounded="xl"
           cover
+          height="600px"
           :src="service?.image"
         ></v-img>
       </v-col>
@@ -42,8 +42,7 @@ import { GeneralStore } from "@/stores/general";
 let store = GeneralStore();
 const route = useRoute();
 const parm = route.query.id; // Access the route parameter 'id'
-let servicedata =
-  store?.generalData?.services[store?.generalData?.services?.length - parm];
+let servicedata = store?.generalData?.services[parm - 1];
 // Define the modules you want to use in the swiper
 import { ref } from "vue";
 

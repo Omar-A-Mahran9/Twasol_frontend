@@ -446,7 +446,7 @@ const footer = {
   },
   copyright: {
     en: "&copy; 2024 Tawasol. All rights reserved.",
-    ar: "&copy; 2024 تواصل تكنولوجي. جميع الحقوق محفوظة.",
+    ar: "&copy; 2024 تواصل التكنولوجيا. جميع الحقوق محفوظة.",
   },
   createdBy: {
     en: 'Created by <a href="https://www.linkedin.com/in/omar-a-mahran/" class="text-blue-400 hover:underline">Omar_A_Mahran</a>',

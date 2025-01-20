@@ -1,7 +1,7 @@
 <template>
   <header class="bg-whit shadow-md">
     <nav
-      class="mx-auto flex container items-center justify-between p-6 lg:px-8"
+      class="mx-auto flex container items-center justify-between p-4 lg:px-8"
       aria-label="Global"
     >
       <div class="flex lg:flex-1">
@@ -9,14 +9,14 @@
           <div v-if="locale === 'ar'" class="d-flex">
             <img
               class="h-12 w-auto"
-              src="/images/header/logo.png"
+              src="/images/header/logo dark.png"
               alt="Company logo"
             />
           </div>
           <div v-else>
             <img
               class="h-12 w-auto"
-              src="/images/header/logo.png"
+              src="/images/header/logo dark.png"
               alt="Company logo"
             />
           </div>
@@ -44,15 +44,50 @@
           }"
           >{{ $t("Home") }}</nuxt-link
         >
-        <nuxt-link
-          :to="localePath('/our_service')"
-          class="text-lg leading-6 text-[#7F7F7F]"
-          style="font-size: 18px"
-          :class="{
-            '!text-main font-bold  active': $route.path === '/our_service',
-          }"
-          >{{ $t("Our Service") }}</nuxt-link
-        >
+        <div class="relative group">
+          <!-- Main Link -->
+          <div class="flex align-center gap-1">
+            <nuxt-link
+              :to="localePath('/our_service')"
+              class="text-lg leading-6 text-[#7F7F7F]"
+              style="font-size: 18px"
+              :class="{
+                '!text-main font-bold active': $route.path === '/our_service',
+              }"
+            >
+              {{ $t("Our Service") }}
+            </nuxt-link>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ml-2 h-4 w-4 text-[#7F7F7F] group-hover:text-main"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
+          <!-- Dropdown Menu -->
+          <div
+            class="absolute left-1/2 transform -translate-x-1/2 hidden w-48 bg-main text-white shadow-md group-hover:block z-10 rounded"
+          >
+            <nuxt-link
+              v-for="service in services"
+              :key="service.id"
+              :to="service.link"
+              class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+              @click.native="handleClick(service.link)"
+            >
+              {{ service.title }}
+            </nuxt-link>
+          </div>
+        </div>
         <nuxt-link
           to="/contact_us"
           class="text-lg leading-6 text-[#7F7F7F]"
@@ -297,7 +332,7 @@
                             <v-icon>mdi-chevron-down</v-icon>
                           </div>
                           <div v-else class="d-flex">
-                            <v-icon>mdi-chevron-down</v-icon>
+                            <v-icon>mdi-chevron-up</v-icon>
                             <img
                               class="h-5 w-auto"
                               src="/images/header/american_icon.svg"
@@ -355,6 +390,23 @@ const languages = [
   { code: "en", label: "English", icon: "mdi-flag" },
 ];
 const localePath = useLocalePath();
+
+let store = GeneralStore();
+let servicedata = store?.generalData?.services;
+
+// Map the services data
+const services = ref(
+  servicedata?.map((service) => ({
+    id: service.id,
+    title: service.name,
+    link: `/our_service/servicesdetails?id=${service.id}`,
+  })) || []
+);
+
+const handleClick = (link) => {
+  // Refresh the page after navigation
+  window.location.href = link;
+};
 
 // Function to change locale and set the text direction
 function setLocaleAndDirection(lang) {

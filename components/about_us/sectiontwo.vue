@@ -16,7 +16,7 @@
                 md="4"
                 lg="2"
               >
-                <NuxtLink :to="`our_service/servicesdetails/${n.id}`">
+                <NuxtLink :to="`/our_service/servicesdetails/${n.id}`">
                   <v-card
                     :class="['ma-4', selectedClass]"
                     color="grey-lighten-1"
