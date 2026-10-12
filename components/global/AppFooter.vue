@@ -432,7 +432,6 @@
 const { locale } = useI18n(); // This will give you the current locale
 import { ref } from "vue"; // Import ref from Vue
 import { GeneralStore } from "@/stores/general";
-import { email } from "@vuelidate/validators";
 import { useRuntimeConfig, useFetch } from "#imports"; // Ensure correct imports
 const config = useRuntimeConfig();
 const store = GeneralStore();
